@@ -21,107 +21,189 @@
           "title": "Pricing",
           "url": "/pricing",
           "icon": "RiMoneyDollarCircleLine"
-        },
-        {
-          "title": "Showcase",
-          "url": "/showcase",
-          "icon": "RiApps2Line"
         }
       ]
     },
-    "buttons": [
-      {
-        "title": "Launch App",
-        "url": "https://flux1-krea.dev/app",
-        "target": "_blank",
-        "variant": "default"
-      }
-    ],
+    "buttons": [],
     "show_sign": true,
     "show_theme": true,
-    "show_locale": true
+    "show_locale": false
   },
   "hero": {
-    "title": "Create Stunning Visuals in Real-time with AI",
-    "highlight_text": "Real-time",
-    "description": "Flux1 Krea is a powerful AI suite that lets you generate, enhance, and animate visuals instantly.<br/>Turn your imagination into high-quality art with our intuitive creative studio.",
+    "title": "#1 World's Photorealistic Image Generator",
+    "highlight_text": "#1 World's",
+    "description": "Introducing Flux1: An opinionated text-to-image model by <strong>Black Forest Labs</strong> and <strong>Krea</strong>.<br/>We excel in photorealism, creating stunningly natural images that avoid the typical oversaturated 'AI look'.",
     "announcement": {
       "label": "New",
-      "title": "🎉 Now with AI Animation! Bring your creations to life.",
+      "title": "A new benchmark in AI-powered photorealism.",
       "url": "/#feature"
     },
-    "tip": "✨ Start creating for free, no credit card required.",
+    "tip": "✨ Experience the next generation of image synthesis.",
     "buttons": [
       {
-        "title": "Start Creating Now",
-        "icon": "RiFlashlightFill",
+        "title": "Generate a Realistic Image",
+        "icon": "RiCameraLensLine",
         "url": "https://flux1-krea.dev/app",
         "target": "_blank",
         "variant": "default"
       },
       {
-        "title": "Join Discord",
-        "icon": "RiDiscordFill",
-        "url": "https://discord.gg/HQNnrzjZQS",
-        "target": "_blank",
+        "title": "View Pricing",
+        "icon": "RiMoneyDollarCircleLine",
+        "url": "/pricing",
+        "target": "_self",
         "variant": "outline"
       }
     ],
     "show_happy_users": true,
     "show_badge": false
   },
+    "branding": {
+    "name": "branding",
+    "title": "Interactive AI Image Generator",
+    "description": "Experience the power of AI image generation right here on our homepage",
+    "generator": {
+      "brand": {
+        "title": "Text to Image",
+        "icon": "RiImageLine"
+      },
+      "title": "#1 World's Photorealistic Image Generator",
+      "description": "Best and Free AI image generator with FLUX.1 Krea. Start by describing your image and click generate.",
+      "input": {
+        "placeholder": "Describe the image you want to create...",
+        "minLength": 3,
+        "maxLength": 500
+      },
+      "button": {
+        "title": "Generate",
+        "icon": "RiMagicLine",
+        "loadingText": "Generating..."
+      },
+      "examples": [
+        {
+          "id": "example-1",
+          "src": "/imgs/examples/landscape.jpg",
+          "alt": "Beautiful mountain landscape at sunset",
+          "prompt": "A serene mountain landscape at golden hour with misty valleys"
+        },
+        {
+          "id": "example-2", 
+          "src": "/imgs/examples/portrait.jpg",
+          "alt": "Professional portrait of a person",
+          "prompt": "Professional headshot of a confident business person"
+        },
+        {
+          "id": "example-3",
+          "src": "/imgs/examples/abstract.jpg", 
+          "alt": "Abstract digital art",
+          "prompt": "Vibrant abstract digital art with flowing colors and geometric shapes"
+        },
+        {
+          "id": "example-4",
+          "src": "/imgs/examples/architecture.jpg",
+          "alt": "Modern architectural design",
+          "prompt": "Modern minimalist building with glass facades and clean lines"
+        },
+        {
+          "id": "example-5",
+          "src": "/imgs/examples/nature.jpg",
+          "alt": "Tropical forest scene",
+          "prompt": "Lush tropical rainforest with sunbeams filtering through the canopy"
+        },
+        {
+          "id": "example-6",
+          "src": "/imgs/examples/fantasy.jpg",
+          "alt": "Fantasy creature illustration",
+          "prompt": "Majestic dragon soaring through clouds above ancient castle"
+        },
+        {
+          "id": "example-7",
+          "src": "/imgs/examples/space.jpg",
+          "alt": "Space exploration scene",
+          "prompt": "Astronaut floating in space with Earth and stars in background"
+        },
+        {
+          "id": "example-8",
+          "src": "/imgs/examples/food.jpg",
+          "alt": "Gourmet food photography",
+          "prompt": "Elegant gourmet dish with artistic plating and soft lighting"
+        }
+      ],
+      "limits": {
+        "showRemaining": true,
+        "upgradePrompt": "Upgrade to Pro for unlimited generations",
+        "upgradeUrl": "/pricing",
+        "messages": {
+          "limitReached": "You've reached your daily limit of free generations",
+          "speedLimited": "Please wait a moment before generating another image",
+          "upgradeRequired": "Upgrade your plan to access this feature"
+        }
+      },
+      "download": {
+        "buttonText": "Download Image",
+        "successMessage": "Image downloaded successfully!",
+        "errorMessage": "Failed to download image. Please try again."
+      },
+      "errors": {
+        "networkError": "Network connection failed. Please check your internet connection.",
+        "generationFailed": "Image generation failed. Please try again with a different prompt.",
+        "retryButton": "Try Again",
+        "validationError": "Please enter a valid prompt (3-500 characters)"
+      }
+    }
+  },
   "introduce": {
     "name": "introduce",
-    "title": "What is Flux1 Krea?",
-    "label": "Introduce",
-    "description": "Flux1 Krea is an all-in-one AI toolkit designed for creators. From real-time image generation to AI-powered upscaling and animation, we provide the tools to bring your creative vision to life effortlessly.",
+    "title": "Escape the 'AI Look'",
+    "label": "Philosophy",
+    "description": "Flux1 Krea is not just another image generator. It's an advanced, opinionated model focused on one thing: producing the most natural and authentic photorealistic images. Developed by Black Forest Labs in collaboration with Krea, it's engineered to overcome the artificial flaws of conventional AI imagery.",
     "image": {
       "src": "/imgs/features/1.png"
     },
     "items": [
       {
-        "title": "Real-time Generation",
-        "description": "Instantly see your image evolve as you type your prompt and adjust settings.",
-        "icon": "RiInputMethodLine"
+        "title": "Subtle & Natural Aesthetics",
+        "description": "Our model is trained to create images with natural lighting, textures, and colors, avoiding the artificial, oversaturated look.",
+        "icon": "RiLeafLine"
       },
       {
-        "title": "Enhance & Upscale",
-        "description": "Transform low-resolution images into stunning HD masterpieces with a single click.",
-        "icon": "RiFocus3Line"
+        "title": "A Master of Photorealism",
+        "description": "From detailed portraits to complex scenes, Flux1 excels at creating images indistinguishable from professional photography.",
+        "icon": "RiCamera3Line"
       },
       {
-        "title": "AI Animation",
-        "description": "Bring your static images to life with powerful, easy-to-use animation capabilities.",
-        "icon": "RiMovie2Line"
+        "title": "Opinionated by Design",
+        "description": "Flux1 has a built-in artistic direction, making it easier to achieve high-quality, realistic results without complex prompt engineering.",
+        "icon": "RiPenNibLine"
       }
     ]
   },
   "benefit": {
     "name": "benefit",
-    "title": "Why Choose Flux1 Krea?",
+    "title": "Why Your Vision Deserves Authentic Photorealism",
     "label": "Benefits",
-    "description": "Get everything you need to create professional-grade visuals, whether you're a designer, marketer, or artist.",
+    "description": "Move beyond generic AI art and create visuals with genuine depth, subtlety, and realism.",
     "items": [
       {
-        "title": "Unleash Your Creativity",
-        "description": "Our intuitive interface and powerful real-time engine remove all barriers, letting your ideas flow freely.",
-        "icon": "RiLightbulbFlashLine",
+        "title": "Finally, End the 'AI Look'",
+        "description": "Tired of plastic-looking, hyper-saturated images? Our model delivers the nuance of real photography, making your visuals stand out.",
+        "icon": "RiEyeCloseLine",
         "image": {
           "src": "/imgs/features/2.png"
         }
       },
       {
-        "title": "Professional Quality, Effortlessly",
-        "description": "Generate high-resolution, commercially-ready visuals, from logos and patterns to photorealistic scenes.",
-        "icon": "RiMedalLine",
+        "title": "Authentic Results, Faster",
+        "description": "Achieve professional, photorealistic results without endless tweaking. Our opinionated model guides you to beautiful imagery effortlessly.",
+        "icon": "RiTeamLine",
         "image": {
           "src": "/imgs/features/3.png"
         }
       },
       {
-        "title": "Train Your Own AI",
-        "description": "Train a personalized AI on your images and style to create truly unique and consistent artwork.",
-        "icon": "RiRobot2Line",
+        "title": "Credibility Through Collaboration",
+        "description": "Leverage the expertise of Black Forest Labs and Krea, leaders in generative AI, for unparalleled image quality.",
+        "icon": "RiShakeHandsLine",
         "image": {
           "src": "/imgs/features/4.png"
         }
@@ -130,8 +212,8 @@
   },
   "usage": {
     "name": "usage",
-    "title": "How to Create with Flux1 Krea",
-    "description": "Bring your vision to life in four simple steps:",
+    "title": "How to Achieve True Photorealism",
+    "description": "Our streamlined process helps you create authentic images in just a few steps:",
     "image": {
       "src": "/imgs/features/1.png"
     },
@@ -139,29 +221,29 @@
     "text_align": "center",
     "items": [
       {
-        "title": "1. Describe Your Vision",
-        "description": "Write a detailed prompt or upload a starting image to guide the AI.",
+        "title": "1. Describe the Scene",
+        "description": "Start with a simple or detailed prompt. Our model is tuned to understand natural language for realistic scenes.",
         "image": {
           "src": "/imgs/features/5.png"
         }
       },
       {
-        "title": "2. Refine in Real-time",
-        "description": "Adjust the AI strength, style, and other parameters to perfect your image instantly.",
+        "title": "2. Trust the Model",
+        "description": "Let our opinionated engine interpret the prompt, applying principles of real-world photography and light.",
         "image": {
           "src": "/imgs/features/6.png"
         }
       },
       {
-        "title": "3. Enhance & Upscale",
-        "description": "Use our tools to add fine details and increase the resolution for a flawless finish.",
+        "title": "3. Refine with Nuance",
+        "description": "Make subtle adjustments if needed. Small changes go a long way in perfecting your photorealistic shot.",
         "image": {
           "src": "/imgs/features/7.png"
         }
       },
       {
-        "title": "4. Download & Share",
-        "description": "Download your high-quality creation and share your masterpiece with the world.",
+        "title": "4. Download Your Photograph",
+        "description": "Export a high-resolution image that captures the essence of a real photograph, not an AI generation.",
         "image": {
           "src": "/imgs/features/8.png"
         }
@@ -170,118 +252,102 @@
   },
   "feature": {
     "name": "feature",
-    "title": "Powerful Features for Every Creator",
-    "description": "Everything you need to transform ideas into incredible visuals.",
+    "title": "Features Designed for Realism",
+    "description": "Every tool is built to support the creation of authentic, lifelike images.",
     "items": [
       {
-        "title": "Real-time Image Generation",
-        "description": "Create and iterate on visuals with zero latency for a fluid creative process.",
+        "title": "Advanced Photorealism Engine",
+        "description": "Powered by Black Forest Labs' research to generate lifelike details, from skin texture to natural lighting.",
         "icon": "RiCpuLine"
       },
       {
-        "title": "AI Upscaling & Enhancement",
-        "description": "Intelligently add detail and increase resolution up to 16x with stunning clarity.",
+        "title": "Natural Color Science",
+        "description": "Generates images with a balanced, realistic color palette, steering clear of the hyper-saturated digital look.",
+        "icon": "RiDropLine"
+      },
+      {
+        "title": "High-Fidelity Detail",
+        "description": "Excels in rendering the fine, subtle details that differentiate a real photo from a digital imitation.",
+        "icon": "RiFocus3Line"
+      },
+      {
+        "title": "Coherent Scene Composition",
+        "description": "Understands how objects and light interact in the real world to create believable, cohesive scenes.",
+        "icon": "RiArtboard2Line"
+      },
+      {
+        "title": "Subtle Imperfection Option",
+        "description": "Optionally add minor, realistic imperfections like film grain or soft focus to enhance authenticity.",
+        "icon": "RiMovie2Line"
+      },
+      {
+        "title": "Realism Upscaler",
+        "description": "Increase resolution while preserving the natural texture and detail, avoiding an overly-sharpened digital look.",
         "icon": "RiZoomInLine"
-      },
-      {
-        "title": "Custom AI Model Training",
-        "description": "Create your own AI model that understands your unique style or brand identity.",
-        "icon": "RiUserVoiceLine"
-      },
-      {
-        "title": "Logo & Pattern Generation",
-        "description": "Design unique logos, illusions, and seamless patterns for any application.",
-        "icon": "RiLayoutGridLine"
-      },
-      {
-        "title": "Image-to-Image Transformation",
-        "description": "Upload an existing image or sketch and use it as a base for your creations.",
-        "icon": "RiImageEditLine"
-      },
-      {
-        "title": "Animation & Video Creation",
-        "description": "Animate your generated images to create captivating videos and GIFs.",
-        "icon": "RiFilmLine"
       }
     ]
   },
   "stats": {
     "name": "stats",
     "label": "Community",
-    "title": "Join a Thriving Creative Community",
-    "description": "trusted by artists, designers, and innovators worldwide.",
+    "title": "Join the Purists of Photorealism",
+    "description": "Trusted by photographers, artists, and brands who demand authenticity.",
     "icon": "FaRegHeart",
     "items": [
       {
         "title": "Trusted by",
-        "label": "1M+",
-        "description": "Creators"
+        "label": "10k+",
+        "description": "Professionals"
       },
       {
         "title": "Generated",
-        "label": "50M+",
-        "description": "Images"
+        "label": "5M+",
+        "description": "Authentic Images"
       },
       {
-        "title": "Average Rating",
-        "label": "4.9/5",
-        "description": "Stars"
+        "title": "Focused on",
+        "label": "100%",
+        "description": "Realism"
       }
     ]
   },
   "testimonial": {
     "name": "testimonial",
     "label": "Testimonial",
-    "title": "What Creators Say About Flux1 Krea",
-    "description": "Hear from designers and artists who are building the future of visuals.",
+    "title": "What Professionals Say About Flux1 Krea",
+    "description": "Hear from creators who were tired of the generic 'AI look'.",
     "icon": "GoThumbsup",
     "items": [
       {
-        "title": "Alex Martinez",
-        "label": "Lead Designer",
-        "description": "The real-time feature is a game-changer for my workflow. I can iterate on concepts with clients live. Flux1 Krea is indispensable.",
+        "title": "Anna Klein",
+        "label": "Professional Photographer",
+        "description": "I'm stunned. For the first time, I'm seeing an AI that understands the subtlety of light and shadow. The results from Flux1 feel like they were captured with a real camera, not generated.",
         "image": {
           "src": "/imgs/users/1.png"
         }
       },
       {
-        "title": "Ben Carter",
-        "label": "Marketing Manager",
-        "description": "We create all our social media visuals with Flux1 Krea now. The quality is incredible, and it saves us so much time and money.",
+        "title": "David Chen",
+        "label": "Creative Director, Ad Agency",
+        "description": "We needed visuals for a campaign that couldn't scream 'AI-generated'. Flux1 was the only model that could deliver the natural, authentic look we required. It's a game-changer for commercial work.",
         "image": {
           "src": "/imgs/users/2.png"
         }
       },
       {
-        "title": "Casey Lee",
-        "label": "Digital Artist",
-        "description": "Training my own AI model was surprisingly easy. Now I have a unique style that is truly my own. I've never been more creative.",
+        "title": "Maria Schmidt",
+        "label": "Architectural Visualizer",
+        "description": "The way Flux1 handles materials and lighting is incredible. It produces renders that feel real and tangible, avoiding that fake, overly perfect digital look. It has saved me countless hours.",
         "image": {
           "src": "/imgs/users/3.png"
         }
       },
       {
-        "title": "Sofia Garcia",
-        "label": "Game Developer",
-        "description": "The upscaler is magic. We can generate low-res concepts quickly and then upscale them to 4K textures for our game. Amazing tool!",
+        "title": "Leo Ricci",
+        "label": "Portrait Artist",
+        "description": "This model understands skin texture. It's not the glossy, flawless plastic you see everywhere else. It generates portraits with life and character in them. Truly remarkable.",
         "image": {
           "src": "/imgs/users/4.png"
-        }
-      },
-      {
-        "title": "James Wilson",
-        "label": "Architect",
-        "description": "I use Flux1 Krea to generate photorealistic architectural renderings from my sketches. It visualizes my ideas in seconds, not hours.",
-        "image": {
-          "src": "/imgs/users/5.png"
-        }
-      },
-      {
-        "title": "Dana Scully",
-        "label": "Freelance Illustrator",
-        "description": "The creative freedom is unparalleled. I can blend styles, create logo illusions, and explore ideas I never could before. A must-have for any artist.",
-        "image": {
-          "src": "/imgs/users/6.png"
         }
       }
     ]
@@ -290,48 +356,44 @@
     "name": "faq",
     "label": "FAQ",
     "title": "Frequently Asked Questions",
-    "description": "Have another question? Contact us on Discord or by email.",
+    "description": "Everything you need to know about our focus on photorealism.",
     "items": [
       {
-        "title": "What is Flux1 Krea Image Generator?",
-        "description": "Flux1 Krea is a comprehensive AI creative suite that allows you to generate images from text prompts in real-time, enhance and upscale your pictures, train your own custom AI models, and even animate your creations."
+        "title": "What do you mean by an 'opinionated' model?",
+        "description": "An opinionated model has a specific, built-in aesthetic—in our case, natural photorealism. This helps users achieve high-quality, consistent results that align with this style, rather than being a generic tool that tries to do everything at a mediocre level."
       },
       {
-        "title": "How does the real-time generation work?",
-        "description": "Our advanced AI model is optimized to process your input and render image updates instantly. As you type or adjust a setting, the AI generates a new version of the image on the fly, giving you immediate visual feedback."
+        "title": "How does Flux1 avoid the 'AI look'?",
+        "description": "Our model was trained on a carefully curated dataset that emphasizes real-world photography. It's specifically tuned to reproduce natural light, subtle textures, and balanced color palettes, while actively avoiding the hyper-saturated and artificially smooth outputs common in other models."
       },
       {
-        "title": "Can I use the generated images commercially?",
-        "description": "Yes, on our paid plans, you retain full ownership of the images you create and can use them for any commercial purpose without any restrictions."
+        "title": "Who are Black Forest Labs and Krea?",
+        "description": "Black Forest Labs is an AI research company specializing in advanced generative models. Krea is a leading creative AI suite. They have collaborated to bring the specialized Flux1 model to life, combining cutting-edge research with a user-focused platform."
       },
       {
-        "title": "What is AI training and how does it work?",
-        "description": "AI training allows you to create a personalized model by uploading a set of your own images. The AI learns your specific style, subjects, or aesthetics, enabling you to generate new, unique images that are consistent with your brand or artistic vision."
+        "title": "Is this only for professional photographers?",
+        "description": "Not at all! While it's powerful enough for professionals, it's designed to be easy for anyone to use. If you want to create images that look like real photos, without needing to be an expert in photography or complex prompts, Flux1 is the perfect tool for you."
       },
       {
-        "title": "What file formats can I download?",
-        "description": "You can download your creations in high-quality formats such as PNG and JPG. For animations, you can export them as MP4 or GIF files."
-      },
-      {
-        "title": "Do you offer a free trial or plan?",
-        "description": "Yes, we offer a free plan with a generous number of credits so you can explore the core features of Flux1 Krea. For unlimited access and advanced features like AI training and high-resolution upscaling, you can upgrade to one of our premium plans."
+        "title": "Can I still create artistic or non-photorealistic images?",
+        "description": "Flux1's core strength and 'opinion' is photorealism. While you can certainly create a range of images, it will always lean towards a more realistic and natural interpretation of your prompt. For stylized or abstract art, other models might be more suitable."
       }
     ]
   },
   "cta": {
     "name": "cta",
-    "title": "Ready to Create Your Masterpiece?",
-    "description": "Join millions of creators and start generating stunning AI visuals today.",
+    "title": "Create Images You Can Call Photographs",
+    "description": "Step away from the world of artificial imagery. Start creating with authenticity.",
     "buttons": [
       {
-        "title": "Start Creating for Free",
+        "title": "Generate Your First Photo",
         "url": "https://flux1-krea.dev/app",
         "target": "_blank",
         "icon": "GoArrowUpRight"
       },
       {
-        "title": "View Showcase",
-        "url": "/showcase",
+        "title": "Learn About the Tech",
+        "url": "/#feature",
         "target": "_self",
         "variant": "outline"
       }
@@ -341,14 +403,14 @@
     "name": "footer",
     "brand": {
       "title": "Flux1 Krea",
-      "description": "An AI suite for real-time image generation, upscaling, and animation. Create amazing visuals with the power of AI.",
+      "description": "An opinionated text-to-image model by Black Forest Labs and Krea, focused on delivering true photorealism.",
       "logo": {
         "src": "/logo.png",
         "alt": "Flux1 Krea Logo"
       },
       "url": "/"
     },
-    "copyright": "© 2025 • Flux1 Krea. All rights reserved.",
+    "copyright": "© 2025 • Flux1 Krea. A Black Forest Labs & Krea Collaboration.",
     "nav": {
       "items": [
         {
@@ -360,11 +422,6 @@
               "target": "_self"
             },
             {
-              "title": "Showcase",
-              "url": "/showcase",
-              "target": "_self"
-            },
-            {
               "title": "Pricing",
               "url": "/pricing",
               "target": "_self"
@@ -372,22 +429,17 @@
           ]
         },
         {
-          "title": "Resources",
+          "title": "Collaboration",
           "children": [
             {
-              "title": "Documentation",
-              "url": "/docs",
-              "target": "_self"
-            },
-            {
-              "title": "Community",
-              "url": "https://discord.gg/HQNnrzjZQS",
+              "title": "Black Forest Labs",
+              "url": "#",
               "target": "_blank"
             },
             {
-              "title": "Blog",
-              "url": "/blog",
-              "target": "_self"
+              "title": "Krea",
+              "url": "https://www.krea.ai/",
+              "target": "_blank"
             }
           ]
         },

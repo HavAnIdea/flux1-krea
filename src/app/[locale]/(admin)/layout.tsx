@@ -77,12 +77,6 @@ export default async function AdminLayout({
           target: "_blank",
           icon: "RiDashboardLine",
         },
-        {
-          title: "Showcases",
-          url: "https://shipany.ai/showcase",
-          target: "_blank",
-          icon: "RiAppsLine",
-        },
       ],
     },
     social: {

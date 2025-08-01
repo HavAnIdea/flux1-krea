@@ -21,24 +21,18 @@
           "title": "定价",
           "url": "/pricing",
           "icon": "RiMoneyDollarCircleLine"
-        },
-        {
-          "title": "案例展示",
-          "url": "/showcase",
-          "icon": "RiApps2Line"
         }
       ]
     },
-    "buttons": [
-    ],
+    "buttons": [],
     "show_sign": true,
     "show_theme": true,
-    "show_locale": true
+    "show_locale": false
   },
   "hero": {
-    "title": "几小时内快速构建 AI 创业项目，而不是几天",
-    "highlight_text": "快速构建",
-    "description": "ShipAny 是一个用于构建 AI SaaS 创业项目的 NextJS 模板。<br/>通过丰富的模板和组件快速启动。",
+    "title": "#1 全球最真实的 AI 图像生成器",
+    "highlight_text": "#1 全球最真实",
+    "description": "介绍 Flux1：由 Black Forest Labs 和 Krea 开发的专业文本转图像模型。我们专注于照片级真实感，创造出避免典型AI感的自然图像。",
     "announcement": {
       "label": "2025",
       "title": "🎉 新年快乐",
@@ -391,11 +385,6 @@
             {
               "title": "功能特点",
               "url": "/#feature",
-              "target": "_self"
-            },
-            {
-              "title": "案例展示",
-              "url": "/#showcase",
               "target": "_self"
             },
             {
