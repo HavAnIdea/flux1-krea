@@ -1,0 +1,452 @@
+{
+  "template": "shipany-template-one",
+  "theme": "light",
+  "header": {
+    "brand": {
+      "title": "Flux1 Krea",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "Flux1 Krea Logo"
+      },
+      "url": "/"
+    },
+    "nav": {
+      "items": [
+        {
+          "title": "Features",
+          "url": "/#feature",
+          "icon": "RiSparkling2Line"
+        },
+        {
+          "title": "Pricing",
+          "url": "/pricing",
+          "icon": "RiMoneyDollarCircleLine"
+        },
+        {
+          "title": "Showcase",
+          "url": "/showcase",
+          "icon": "RiApps2Line"
+        }
+      ]
+    },
+    "buttons": [
+      {
+        "title": "Launch App",
+        "url": "https://flux1-krea.dev/app",
+        "target": "_blank",
+        "variant": "default"
+      }
+    ],
+    "show_sign": true,
+    "show_theme": true,
+    "show_locale": true
+  },
+  "hero": {
+    "title": "Create Stunning Visuals in Real-time with AI",
+    "highlight_text": "Real-time",
+    "description": "Flux1 Krea is a powerful AI suite that lets you generate, enhance, and animate visuals instantly.<br/>Turn your imagination into high-quality art with our intuitive creative studio.",
+    "announcement": {
+      "label": "New",
+      "title": "🎉 Now with AI Animation! Bring your creations to life.",
+      "url": "/#feature"
+    },
+    "tip": "✨ Start creating for free, no credit card required.",
+    "buttons": [
+      {
+        "title": "Start Creating Now",
+        "icon": "RiFlashlightFill",
+        "url": "https://flux1-krea.dev/app",
+        "target": "_blank",
+        "variant": "default"
+      },
+      {
+        "title": "Join Discord",
+        "icon": "RiDiscordFill",
+        "url": "https://discord.gg/HQNnrzjZQS",
+        "target": "_blank",
+        "variant": "outline"
+      }
+    ],
+    "show_happy_users": true,
+    "show_badge": false
+  },
+  "introduce": {
+    "name": "introduce",
+    "title": "What is Flux1 Krea?",
+    "label": "Introduce",
+    "description": "Flux1 Krea is an all-in-one AI toolkit designed for creators. From real-time image generation to AI-powered upscaling and animation, we provide the tools to bring your creative vision to life effortlessly.",
+    "image": {
+      "src": "/imgs/features/1.png"
+    },
+    "items": [
+      {
+        "title": "Real-time Generation",
+        "description": "Instantly see your image evolve as you type your prompt and adjust settings.",
+        "icon": "RiInputMethodLine"
+      },
+      {
+        "title": "Enhance & Upscale",
+        "description": "Transform low-resolution images into stunning HD masterpieces with a single click.",
+        "icon": "RiFocus3Line"
+      },
+      {
+        "title": "AI Animation",
+        "description": "Bring your static images to life with powerful, easy-to-use animation capabilities.",
+        "icon": "RiMovie2Line"
+      }
+    ]
+  },
+  "benefit": {
+    "name": "benefit",
+    "title": "Why Choose Flux1 Krea?",
+    "label": "Benefits",
+    "description": "Get everything you need to create professional-grade visuals, whether you're a designer, marketer, or artist.",
+    "items": [
+      {
+        "title": "Unleash Your Creativity",
+        "description": "Our intuitive interface and powerful real-time engine remove all barriers, letting your ideas flow freely.",
+        "icon": "RiLightbulbFlashLine",
+        "image": {
+          "src": "/imgs/features/2.png"
+        }
+      },
+      {
+        "title": "Professional Quality, Effortlessly",
+        "description": "Generate high-resolution, commercially-ready visuals, from logos and patterns to photorealistic scenes.",
+        "icon": "RiMedalLine",
+        "image": {
+          "src": "/imgs/features/3.png"
+        }
+      },
+      {
+        "title": "Train Your Own AI",
+        "description": "Train a personalized AI on your images and style to create truly unique and consistent artwork.",
+        "icon": "RiRobot2Line",
+        "image": {
+          "src": "/imgs/features/4.png"
+        }
+      }
+    ]
+  },
+  "usage": {
+    "name": "usage",
+    "title": "How to Create with Flux1 Krea",
+    "description": "Bring your vision to life in four simple steps:",
+    "image": {
+      "src": "/imgs/features/1.png"
+    },
+    "image_position": "left",
+    "text_align": "center",
+    "items": [
+      {
+        "title": "1. Describe Your Vision",
+        "description": "Write a detailed prompt or upload a starting image to guide the AI.",
+        "image": {
+          "src": "/imgs/features/5.png"
+        }
+      },
+      {
+        "title": "2. Refine in Real-time",
+        "description": "Adjust the AI strength, style, and other parameters to perfect your image instantly.",
+        "image": {
+          "src": "/imgs/features/6.png"
+        }
+      },
+      {
+        "title": "3. Enhance & Upscale",
+        "description": "Use our tools to add fine details and increase the resolution for a flawless finish.",
+        "image": {
+          "src": "/imgs/features/7.png"
+        }
+      },
+      {
+        "title": "4. Download & Share",
+        "description": "Download your high-quality creation and share your masterpiece with the world.",
+        "image": {
+          "src": "/imgs/features/8.png"
+        }
+      }
+    ]
+  },
+  "feature": {
+    "name": "feature",
+    "title": "Powerful Features for Every Creator",
+    "description": "Everything you need to transform ideas into incredible visuals.",
+    "items": [
+      {
+        "title": "Real-time Image Generation",
+        "description": "Create and iterate on visuals with zero latency for a fluid creative process.",
+        "icon": "RiCpuLine"
+      },
+      {
+        "title": "AI Upscaling & Enhancement",
+        "description": "Intelligently add detail and increase resolution up to 16x with stunning clarity.",
+        "icon": "RiZoomInLine"
+      },
+      {
+        "title": "Custom AI Model Training",
+        "description": "Create your own AI model that understands your unique style or brand identity.",
+        "icon": "RiUserVoiceLine"
+      },
+      {
+        "title": "Logo & Pattern Generation",
+        "description": "Design unique logos, illusions, and seamless patterns for any application.",
+        "icon": "RiLayoutGridLine"
+      },
+      {
+        "title": "Image-to-Image Transformation",
+        "description": "Upload an existing image or sketch and use it as a base for your creations.",
+        "icon": "RiImageEditLine"
+      },
+      {
+        "title": "Animation & Video Creation",
+        "description": "Animate your generated images to create captivating videos and GIFs.",
+        "icon": "RiFilmLine"
+      }
+    ]
+  },
+  "stats": {
+    "name": "stats",
+    "label": "Community",
+    "title": "Join a Thriving Creative Community",
+    "description": "trusted by artists, designers, and innovators worldwide.",
+    "icon": "FaRegHeart",
+    "items": [
+      {
+        "title": "Trusted by",
+        "label": "1M+",
+        "description": "Creators"
+      },
+      {
+        "title": "Generated",
+        "label": "50M+",
+        "description": "Images"
+      },
+      {
+        "title": "Average Rating",
+        "label": "4.9/5",
+        "description": "Stars"
+      }
+    ]
+  },
+  "testimonial": {
+    "name": "testimonial",
+    "label": "Testimonial",
+    "title": "What Creators Say About Flux1 Krea",
+    "description": "Hear from designers and artists who are building the future of visuals.",
+    "icon": "GoThumbsup",
+    "items": [
+      {
+        "title": "Alex Martinez",
+        "label": "Lead Designer",
+        "description": "The real-time feature is a game-changer for my workflow. I can iterate on concepts with clients live. Flux1 Krea is indispensable.",
+        "image": {
+          "src": "/imgs/users/1.png"
+        }
+      },
+      {
+        "title": "Ben Carter",
+        "label": "Marketing Manager",
+        "description": "We create all our social media visuals with Flux1 Krea now. The quality is incredible, and it saves us so much time and money.",
+        "image": {
+          "src": "/imgs/users/2.png"
+        }
+      },
+      {
+        "title": "Casey Lee",
+        "label": "Digital Artist",
+        "description": "Training my own AI model was surprisingly easy. Now I have a unique style that is truly my own. I've never been more creative.",
+        "image": {
+          "src": "/imgs/users/3.png"
+        }
+      },
+      {
+        "title": "Sofia Garcia",
+        "label": "Game Developer",
+        "description": "The upscaler is magic. We can generate low-res concepts quickly and then upscale them to 4K textures for our game. Amazing tool!",
+        "image": {
+          "src": "/imgs/users/4.png"
+        }
+      },
+      {
+        "title": "James Wilson",
+        "label": "Architect",
+        "description": "I use Flux1 Krea to generate photorealistic architectural renderings from my sketches. It visualizes my ideas in seconds, not hours.",
+        "image": {
+          "src": "/imgs/users/5.png"
+        }
+      },
+      {
+        "title": "Dana Scully",
+        "label": "Freelance Illustrator",
+        "description": "The creative freedom is unparalleled. I can blend styles, create logo illusions, and explore ideas I never could before. A must-have for any artist.",
+        "image": {
+          "src": "/imgs/users/6.png"
+        }
+      }
+    ]
+  },
+  "faq": {
+    "name": "faq",
+    "label": "FAQ",
+    "title": "Frequently Asked Questions",
+    "description": "Have another question? Contact us on Discord or by email.",
+    "items": [
+      {
+        "title": "What is Flux1 Krea Image Generator?",
+        "description": "Flux1 Krea is a comprehensive AI creative suite that allows you to generate images from text prompts in real-time, enhance and upscale your pictures, train your own custom AI models, and even animate your creations."
+      },
+      {
+        "title": "How does the real-time generation work?",
+        "description": "Our advanced AI model is optimized to process your input and render image updates instantly. As you type or adjust a setting, the AI generates a new version of the image on the fly, giving you immediate visual feedback."
+      },
+      {
+        "title": "Can I use the generated images commercially?",
+        "description": "Yes, on our paid plans, you retain full ownership of the images you create and can use them for any commercial purpose without any restrictions."
+      },
+      {
+        "title": "What is AI training and how does it work?",
+        "description": "AI training allows you to create a personalized model by uploading a set of your own images. The AI learns your specific style, subjects, or aesthetics, enabling you to generate new, unique images that are consistent with your brand or artistic vision."
+      },
+      {
+        "title": "What file formats can I download?",
+        "description": "You can download your creations in high-quality formats such as PNG and JPG. For animations, you can export them as MP4 or GIF files."
+      },
+      {
+        "title": "Do you offer a free trial or plan?",
+        "description": "Yes, we offer a free plan with a generous number of credits so you can explore the core features of Flux1 Krea. For unlimited access and advanced features like AI training and high-resolution upscaling, you can upgrade to one of our premium plans."
+      }
+    ]
+  },
+  "cta": {
+    "name": "cta",
+    "title": "Ready to Create Your Masterpiece?",
+    "description": "Join millions of creators and start generating stunning AI visuals today.",
+    "buttons": [
+      {
+        "title": "Start Creating for Free",
+        "url": "https://flux1-krea.dev/app",
+        "target": "_blank",
+        "icon": "GoArrowUpRight"
+      },
+      {
+        "title": "View Showcase",
+        "url": "/showcase",
+        "target": "_self",
+        "variant": "outline"
+      }
+    ]
+  },
+  "footer": {
+    "name": "footer",
+    "brand": {
+      "title": "Flux1 Krea",
+      "description": "An AI suite for real-time image generation, upscaling, and animation. Create amazing visuals with the power of AI.",
+      "logo": {
+        "src": "/logo.png",
+        "alt": "Flux1 Krea Logo"
+      },
+      "url": "/"
+    },
+    "copyright": "© 2025 • Flux1 Krea. All rights reserved.",
+    "nav": {
+      "items": [
+        {
+          "title": "Product",
+          "children": [
+            {
+              "title": "Features",
+              "url": "/#feature",
+              "target": "_self"
+            },
+            {
+              "title": "Showcase",
+              "url": "/showcase",
+              "target": "_self"
+            },
+            {
+              "title": "Pricing",
+              "url": "/pricing",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "Resources",
+          "children": [
+            {
+              "title": "Documentation",
+              "url": "/docs",
+              "target": "_self"
+            },
+            {
+              "title": "Community",
+              "url": "https://discord.gg/HQNnrzjZQS",
+              "target": "_blank"
+            },
+            {
+              "title": "Blog",
+              "url": "/blog",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "Company",
+          "children": [
+            {
+              "title": "About Us",
+              "url": "/about",
+              "target": "_self"
+            },
+            {
+              "title": "Contact",
+              "url": "mailto:support@flux1-krea.dev",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    },
+    "social": {
+      "items": [
+        {
+          "title": "X",
+          "icon": "RiTwitterXFill",
+          "url": "https://x.com/krea_ai",
+          "target": "_blank"
+        },
+        {
+          "title": "Github",
+          "icon": "RiGithubFill",
+          "url": "https://github.com/flux1-krea",
+          "target": "_blank"
+        },
+        {
+          "title": "Discord",
+          "icon": "RiDiscordFill",
+          "url": "https://discord.gg/HQNnrzjZQS",
+          "target": "_blank"
+        },
+        {
+          "title": "Email",
+          "icon": "RiMailLine",
+          "url": "mailto:support@flux1-krea.dev",
+          "target": "_self"
+        }
+      ]
+    },
+    "agreement": {
+      "items": [
+        {
+          "title": "Privacy Policy",
+          "url": "/privacy-policy"
+        },
+        {
+          "title": "Terms of Service",
+          "url": "/terms-of-service"
+        }
+      ]
+    }
+  }
+}
