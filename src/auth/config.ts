@@ -9,36 +9,20 @@ import { getIsoTimestr } from "@/lib/time";
 import { getUuid } from "@/lib/hash";
 import { saveUser } from "@/services/user";
 import { handleSignInUser } from "./handler";
-// 代理配置 - 只在本地开发环境使用
-const shouldUseProxy =
+// 代理配置 - 只在本地开发环境使用环境变量方式
+if (
   process.env.NODE_ENV === 'development' &&
   process.env.HTTPS_PROXY &&
-  process.env.NEXT_PUBLIC_WEB_URL?.includes('localhost');
-
-if (shouldUseProxy) {
+  process.env.NEXT_PUBLIC_WEB_URL?.includes('localhost')
+) {
   const proxyUrl = process.env.HTTPS_PROXY;
 
   if (proxyUrl) {
-    try {
-      // 在生产环境中跳过 undici 代理设置，避免 Edge Runtime 兼容性问题
-      if (typeof window === 'undefined' && process.env.NODE_ENV === 'development') {
-        // 动态导入 undici，避免在 Edge Runtime 中出现问题
-        import('undici').then(({ ProxyAgent, setGlobalDispatcher }) => {
-          const proxyAgent = new ProxyAgent(proxyUrl);
-          setGlobalDispatcher(proxyAgent);
-          console.log(`🔧 Development proxy enabled with undici: ${proxyUrl}`);
-        }).catch((error) => {
-          console.warn('Failed to set up undici proxy:', error);
-          // 备用方案：通过环境变量设置代理
-          process.env.HTTP_PROXY = proxyUrl;
-          process.env.HTTPS_PROXY = proxyUrl;
-          process.env.ALL_PROXY = proxyUrl;
-          console.log(`🔧 Development proxy enabled with env vars: ${proxyUrl}`);
-        });
-      }
-    } catch (error) {
-      console.warn('Failed to set up proxy:', error);
-    }
+    // 使用环境变量设置代理，避免依赖 undici 包
+    process.env.HTTP_PROXY = proxyUrl;
+    process.env.HTTPS_PROXY = proxyUrl;
+    process.env.ALL_PROXY = proxyUrl;
+    console.log(`🔧 Development proxy enabled: ${proxyUrl}`);
   }
 }
 
