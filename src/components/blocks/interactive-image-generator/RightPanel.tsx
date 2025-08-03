@@ -110,8 +110,8 @@ export default function RightPanel({
         </CardContent>
       </Card>
 
-      {/* Image Info */}
-      {state.generatedImage && !state.isGenerating && (
+      {/* Image Info - Hidden */}
+      {/* {state.generatedImage && !state.isGenerating && (
         <Card>
           <CardContent className="p-4">
             <div className="space-y-3">
@@ -122,7 +122,6 @@ export default function RightPanel({
                 </span>
               </div>
 
-              {/* Prompt Display */}
               <div className="space-y-1">
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                   Prompt
@@ -132,7 +131,6 @@ export default function RightPanel({
                 </p>
               </div>
 
-              {/* Image Details */}
               <div className="grid grid-cols-2 gap-4 text-xs">
                 <div>
                   <p className="text-muted-foreground">Format</p>
@@ -146,7 +144,7 @@ export default function RightPanel({
             </div>
           </CardContent>
         </Card>
-      )}
+      )} */}
     </div>
   );
 }

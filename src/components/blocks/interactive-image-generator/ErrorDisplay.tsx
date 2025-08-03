@@ -83,10 +83,14 @@ export default function ErrorDisplay({ error, onRetry, className = "" }: ErrorDi
                     size="sm"
                     className="flex items-center gap-2"
                 >
-                    <Link href="/pricing">
+                    {/* <Link href="/pricing">
                         <Crown className="w-3 h-3" />
                         Upgrade to Pro
-                    </Link>
+                    </Link> */}
+                    <span className="flex items-center gap-2">
+                        <Crown className="w-3 h-3" />
+                        Upgrade to Pro
+                    </span>
                 </Button>
             );
         }

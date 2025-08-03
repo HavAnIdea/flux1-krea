@@ -24,7 +24,7 @@ import Icon from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
 import { useAppContext } from "@/contexts/app";
-import { useTranslations } from "@/lib/translations";
+import { useTranslations } from "next-intl";
 import { Account } from "@/types/blocks/base";
 import { Fragment } from "react";
 

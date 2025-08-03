@@ -143,11 +143,11 @@ export default function UsageStatus({ usageStatus, className = "" }: UsageStatus
                             </Button>
                         ) : (
                             <>
-                                <Button asChild size="sm" variant="outline" className="flex-1">
+                                {/* <Button asChild size="sm" variant="outline" className="flex-1">
                                     <Link href="/pricing">
                                         Upgrade to Pro
                                     </Link>
-                                </Button>
+                                </Button> */}
                                 {resetTime && (
                                     <div className="flex items-center gap-1 text-xs text-muted-foreground px-2">
                                         <Clock className="w-3 h-3" />
@@ -168,11 +168,11 @@ export default function UsageStatus({ usageStatus, className = "" }: UsageStatus
                             <span className="text-xs text-muted-foreground">
                                 Want unlimited generations?
                             </span>
-                            <Button asChild size="sm" variant="outline">
+                            {/* <Button asChild size="sm" variant="outline">
                                 <Link href="/pricing">
                                     Upgrade
                                 </Link>
-                            </Button>
+                            </Button> */}
                         </div>
                     </div>
                 )}

@@ -10,7 +10,7 @@ import InviteModal from "./modal";
 import { User } from "@/types/user";
 import { toast } from "sonner";
 import { useAppContext } from "@/contexts/app";
-import { useTranslations } from "@/lib/translations";
+import { useTranslations } from "next-intl";
 
 export default function Invite({ summary }: { summary: any }) {
   const t = useTranslations();

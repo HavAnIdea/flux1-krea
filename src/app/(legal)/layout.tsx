@@ -3,10 +3,10 @@ import "@/app/globals.css";
 import { MdOutlineHome } from "react-icons/md";
 import { Metadata } from "next";
 import React from "react";
-import { getTranslations } from "@/lib/translations";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = getTranslations();
+  const t = await getTranslations();
 
   return {
     title: {
@@ -34,8 +34,10 @@ export default function LegalLayout({
             <MdOutlineHome className="text-2xl mx-8 my-8" />
             {/* <img className="w-10 h-10 mx-4 my-4" src="/logo.png" /> */}
           </a>
-          <div className="text-md max-w-3xl mx-auto leading-loose pt-4 pb-8 px-8 prose prose-slate dark:prose-invert prose-headings:font-semibold prose-a:text-primary hover:prose-a:text-primary/80 prose-strong:text-base-content prose-code:text-base-content prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md">
-            {children}
+          <div className="max-w-4xl mx-auto leading-relaxed pt-4 pb-8 px-8">
+            <div className="legal-content">
+              {children}
+            </div>
           </div>
         </div>
       </body>

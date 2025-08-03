@@ -99,21 +99,21 @@ export default function UpgradePrompt({ trigger, remainingCount, className = "" 
                                         Sign In
                                     </Link>
                                 </Button>
-                                <Button asChild size="sm" variant="outline" className="flex-1">
+                                {/* <Button asChild size="sm" variant="outline" className="flex-1">
                                     <Link href="/pricing" className="flex items-center gap-1">
                                         <Crown className="w-3 h-3" />
                                         Upgrade
                                     </Link>
-                                </Button>
+                                </Button> */}
                             </>
                         ) : (
                             <>
-                                <Button asChild size="sm" className="flex-1">
+                                {/* <Button asChild size="sm" className="flex-1">
                                     <Link href="/pricing" className="flex items-center gap-1">
                                         <Crown className="w-3 h-3" />
                                         Upgrade to Pro
                                     </Link>
-                                </Button>
+                                </Button> */}
                                 <Button size="sm" variant="outline" className="px-3">
                                     <Zap className="w-3 h-3" />
                                 </Button>

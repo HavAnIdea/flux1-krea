@@ -237,20 +237,12 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
     }));
   }, []);
 
-  // Handle download
+  // Handle download - placeholder function (actual download is handled by DownloadButton)
   const handleDownload = useCallback(async () => {
-    if (!state.generatedImage) return;
-
-    try {
-      await imageGenerationService.downloadImage(
-        state.generatedImage,
-        `generated-image-${Date.now()}.png`
-      );
-    } catch (error) {
-      console.error('Download failed:', error);
-      // Could add error state here if needed
-    }
-  }, [state.generatedImage]);
+    // This function is called by DownloadButton after successful download
+    // Can be used for analytics or other post-download actions
+    console.log('Image downloaded successfully');
+  }, []);
 
   return (
     <section id={section.name} className="pt-20 pb-16 bg-gradient-to-br from-background via-muted/10 to-primary/5">
@@ -296,7 +288,7 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
         <section className="py-4">
           <div className="flex flex-col items-center gap-2">
             <h2 className="text-center text-2xl font-semibold lg:text-3xl">
-              Try these examples
+              Try These Examples
             </h2>
           </div>
           <div className="lg:container">

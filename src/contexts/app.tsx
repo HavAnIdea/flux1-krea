@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useCallback,
 } from "react";
 import { cacheGet, cacheRemove } from "@/lib/cache";
 
@@ -39,30 +40,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
   const [showFeedback, setShowFeedback] = useState<boolean>(false);
 
-  const fetchUserInfo = async function () {
-    try {
-      const resp = await fetch("/api/get-user-info", {
-        method: "POST",
-      });
-
-      if (!resp.ok) {
-        throw new Error("fetch user info failed with status: " + resp.status);
-      }
-
-      const { code, message, data } = await resp.json();
-      if (code !== 0) {
-        throw new Error(message);
-      }
-
-      setUser(data);
-
-      updateInvite(data);
-    } catch (e) {
-      console.log("fetch user info failed");
-    }
-  };
-
-  const updateInvite = async (user: User) => {
+  const updateInvite = useCallback(async (user: User) => {
     try {
       if (user.invited_by) {
         // user already been invited
@@ -112,13 +90,36 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     } catch (e) {
       console.log("update invite failed: ", e);
     }
-  };
+  }, []);
+
+  const fetchUserInfo = useCallback(async function () {
+    try {
+      const resp = await fetch("/api/get-user-info", {
+        method: "POST",
+      });
+
+      if (!resp.ok) {
+        throw new Error("fetch user info failed with status: " + resp.status);
+      }
+
+      const { code, message, data } = await resp.json();
+      if (code !== 0) {
+        throw new Error(message);
+      }
+
+      setUser(data);
+
+      updateInvite(data);
+    } catch (e) {
+      console.log("fetch user info failed");
+    }
+  }, [updateInvite]);
 
   useEffect(() => {
     if (session && session.user) {
       fetchUserInfo();
     }
-  }, [session]);
+  }, [session, fetchUserInfo]);
 
   return (
     <AppContext.Provider

@@ -15,3 +15,48 @@
 .container {
   @apply mx-auto max-w-7xl px-4 md:px-8;
 }
+
+/* Legal pages typography styles */
+.legal-content h1 {
+  @apply text-3xl font-bold mb-8 mt-0 text-foreground;
+}
+
+.legal-content h2 {
+  @apply text-2xl font-bold mt-8 mb-4 text-foreground;
+}
+
+.legal-content h3 {
+  @apply text-xl font-semibold mt-6 mb-3 text-foreground;
+}
+
+.legal-content p {
+  @apply mb-4 text-base leading-relaxed text-muted-foreground;
+}
+
+.legal-content ul {
+  @apply mb-4 ml-6 list-disc;
+}
+
+.legal-content ol {
+  @apply mb-4 ml-6 list-decimal;
+}
+
+.legal-content li {
+  @apply mb-2 text-base leading-relaxed text-muted-foreground pl-2;
+}
+
+.legal-content strong {
+  @apply font-semibold text-foreground;
+}
+
+.legal-content a {
+  @apply text-primary hover:text-primary/80 underline;
+}
+
+.legal-content code {
+  @apply bg-muted px-1.5 py-0.5 rounded-md text-sm font-mono text-foreground;
+}
+
+.legal-content hr {
+  @apply my-8 border-border;
+}

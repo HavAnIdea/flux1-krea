@@ -189,7 +189,7 @@
       },
       {
         "title": "Credibility Through Collaboration",
-        "description": "Leverage the expertise of Black Forest Labs and Krea, leaders in generative AI, for unparalleled image quality.",
+        "description": "Leverage the expertise of FLUX.1 Krea, leaders in generative AI, for unparalleled image quality.",
         "icon": "RiShakeHandsLine",
         "image": {
           "src": "/imgs/features/4.png"
@@ -354,7 +354,7 @@
         "description": "Our model was trained on a carefully curated dataset that emphasizes real-world photography. It's specifically tuned to reproduce natural light, subtle textures, and balanced color palettes, while actively avoiding the hyper-saturated and artificially smooth outputs common in other models."
       },
       {
-        "title": "Who are Black Forest Labs and Krea?",
+        "title": "Who are FLUX.1 Krea?",
         "description": "Black Forest Labs is an AI research company specializing in advanced generative models. Krea is a leading creative AI suite. They have collaborated to bring the specialized Flux1 model to life, combining cutting-edge research with a user-focused platform."
       },
       {
@@ -374,15 +374,9 @@
     "buttons": [
       {
         "title": "Generate Your First Photo",
-        "url": "https://flux1-krea.dev/app",
-        "target": "_blank",
-        "icon": "GoArrowUpRight"
-      },
-      {
-        "title": "Learn About the Tech",
-        "url": "/#feature",
+        "url": "/",
         "target": "_self",
-        "variant": "outline"
+        "icon": "GoArrowUpRight"
       }
     ]
   },
@@ -390,14 +384,14 @@
     "name": "footer",
     "brand": {
       "title": "Flux1 Krea",
-      "description": "An opinionated text-to-image model by Black Forest Labs and Krea, focused on delivering true photorealism.",
+      "description": "An opinionated text-to-image model by FLUX.1 Krea, focused on delivering true photorealism.",
       "logo": {
         "src": "/logo.png",
         "alt": "Flux1 Krea Logo"
       },
       "url": "/"
     },
-    "copyright": "© 2025 • Flux1 Krea. A Black Forest Labs & Krea Collaboration.",
+    "copyright": "© 2025 • Flux1 Krea",
     "nav": {
       "items": [
         {
@@ -407,26 +401,6 @@
               "title": "Features",
               "url": "/#feature",
               "target": "_self"
-            },
-            {
-              "title": "Pricing",
-              "url": "/pricing",
-              "target": "_self"
-            }
-          ]
-        },
-        {
-          "title": "Collaboration",
-          "children": [
-            {
-              "title": "Black Forest Labs",
-              "url": "#",
-              "target": "_blank"
-            },
-            {
-              "title": "Krea",
-              "url": "https://www.krea.ai/",
-              "target": "_blank"
             }
           ]
         },
@@ -434,12 +408,7 @@
           "title": "Company",
           "children": [
             {
-              "title": "About Us",
-              "url": "/about",
-              "target": "_self"
-            },
-            {
-              "title": "Contact",
+              "title": "Contact Us",
               "url": "mailto:support@flux1-krea.dev",
               "target": "_self"
             }
@@ -448,32 +417,7 @@
       ]
     },
     "social": {
-      "items": [
-        {
-          "title": "X",
-          "icon": "RiTwitterXFill",
-          "url": "https://x.com/krea_ai",
-          "target": "_blank"
-        },
-        {
-          "title": "Github",
-          "icon": "RiGithubFill",
-          "url": "https://github.com/flux1-krea",
-          "target": "_blank"
-        },
-        {
-          "title": "Discord",
-          "icon": "RiDiscordFill",
-          "url": "https://discord.gg/HQNnrzjZQS",
-          "target": "_blank"
-        },
-        {
-          "title": "Email",
-          "icon": "RiMailLine",
-          "url": "mailto:support@flux1-krea.dev",
-          "target": "_self"
-        }
-      ]
+      "items": []
     },
     "agreement": {
       "items": [

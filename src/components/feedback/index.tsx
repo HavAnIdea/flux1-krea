@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { useAppContext } from "@/contexts/app";
 import { useState } from "react";
 import { SocialItem } from "@/types/blocks/base";
-import { useTranslations } from "@/lib/translations";
+import { useTranslations } from "next-intl";
 
 export default function Feedback({
   socialLinks,

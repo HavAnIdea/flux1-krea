@@ -24,14 +24,14 @@ export default function SignUser({ user }: { user: User }) {
     {
       title: user.nickname,
     },
-    {
-      title: t("user.user_center"),
-      url: "/my-orders",
-    },
-    {
-      title: t("user.admin_system"),
-      url: "/admin/users",
-    },
+    // {
+    //   title: t("user.user_center"),
+    //   url: "/my-orders",
+    // },
+    // {
+    //   title: t("user.admin_system"),
+    //   url: "/admin/users",
+    // },
     {
       title: t("user.sign_out"),
       onClick: () => signOut(),
