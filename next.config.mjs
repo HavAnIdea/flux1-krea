@@ -31,6 +31,18 @@ const nextConfig = {
   async redirects() {
     return [];
   },
+  webpack: (config, { isServer }) => {
+    // Fix for __dirname not defined in Edge Runtime
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        os: false,
+      };
+    }
+    return config;
+  },
 };
 
 // Make sure experimental mdx flag is enabled

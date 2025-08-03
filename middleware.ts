@@ -1,9 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import createMiddleware from 'next-intl/middleware';
-import { routing } from './src/i18n/routing';
-
-const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -35,8 +31,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.rewrite(new URL('/404', request.url));
   }
   
-  // Apply internationalization middleware for allowed paths
-  return intlMiddleware(request);
+  // Continue with the request
+  return NextResponse.next();
 }
 
 export const config = {
