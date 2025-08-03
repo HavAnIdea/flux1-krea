@@ -73,7 +73,7 @@ export default async function AdminLayout({
         },
         {
           title: "Blocks",
-          url: "https://shipany.ai/blocks",
+          url: "https://flux1-krea.dev/blocks",
           target: "_blank",
           icon: "RiDashboardLine",
         },

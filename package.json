@@ -3,7 +3,7 @@
   "version": "2.5.0",
   "private": true,
   "author": "idoubi",
-  "homepage": "https://shipany.ai",
+  "homepage": "https://flux1-krea.dev",
   "scripts": {
     "dev": "cross-env NODE_NO_WARNINGS=1 next dev --turbopack",
     "build": "next build",

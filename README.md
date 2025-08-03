@@ -67,7 +67,7 @@ npm run cf:deploy
 
 ## Community
 
-- [ShipAny](https://shipany.ai)
+- [ShipAny](https://flux1-krea.dev)
 - [Documentation](https://docs.shipany.ai)
 - [Discord](https://discord.gg/HQNnrzjZQS)
 
