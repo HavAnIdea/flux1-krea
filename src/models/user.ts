@@ -1,6 +1,7 @@
 import { users } from "@/db/schema";
 import { db } from "@/db";
-import { desc, eq, gte, inArray } from "drizzle-orm";
+import { desc, eq, gte, inArray, sql } from "drizzle-orm";
+import { dbPerf } from "@/lib/performance";
 
 export async function insertUser(
   data: typeof users.$inferInsert
@@ -133,4 +134,91 @@ export async function getUserCountByDate(
   });
 
   return dateCountMap;
+}
+
+// Usage limit related functions
+
+export async function getUserUsageInfo(
+  user_uuid: string
+): Promise<{
+  id: number;
+  uuid: string;
+  email: string;
+  plan: string;
+  usage_count: number;
+  last_usage_date: string | null;
+  created_at: Date | null;
+  updated_at: Date | null;
+} | undefined> {
+  return await dbPerf.measure('getUserUsageInfo', async () => {
+    const [user] = await db()
+      .select({
+        id: users.id,
+        uuid: users.uuid,
+        email: users.email,
+        plan: users.plan,
+        usage_count: users.usage_count,
+        last_usage_date: users.last_usage_date,
+        created_at: users.created_at,
+        updated_at: users.updated_at,
+      })
+      .from(users)
+      .where(eq(users.uuid, user_uuid))
+      .limit(1);
+
+    return user;
+  });
+}
+
+export async function updateUserUsageCount(
+  user_uuid: string,
+  usage_count: number,
+  last_usage_date: string
+): Promise<typeof users.$inferSelect | undefined> {
+  const [user] = await db()
+    .update(users)
+    .set({
+      usage_count,
+      last_usage_date,
+      updated_at: new Date()
+    })
+    .where(eq(users.uuid, user_uuid))
+    .returning();
+
+  return user;
+}
+
+export async function resetUserDailyUsage(
+  user_uuid: string,
+  current_date: string
+): Promise<typeof users.$inferSelect | undefined> {
+  const [user] = await db()
+    .update(users)
+    .set({
+      usage_count: 1,
+      last_usage_date: current_date,
+      updated_at: new Date()
+    })
+    .where(eq(users.uuid, user_uuid))
+    .returning();
+
+  return user;
+}
+
+export async function incrementUserUsageCount(
+  user_uuid: string
+): Promise<typeof users.$inferSelect | undefined> {
+  return await dbPerf.measure('incrementUserUsageCount', async () => {
+    // This is an atomic increment operation using SQL
+    const [user] = await db()
+      .update(users)
+      .set({
+        usage_count: sql`${users.usage_count} + 1`,
+        updated_at: new Date()
+      })
+      .where(eq(users.uuid, user_uuid))
+      .returning();
+
+    return user;
+  });
 }

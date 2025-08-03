@@ -9,6 +9,33 @@ import { getIsoTimestr } from "@/lib/time";
 import { getUuid } from "@/lib/hash";
 import { saveUser } from "@/services/user";
 import { handleSignInUser } from "./handler";
+// 代理配置 - 只在本地开发环境使用
+const shouldUseProxy =
+  process.env.NODE_ENV === 'development' &&
+  process.env.HTTPS_PROXY &&
+  process.env.NEXT_PUBLIC_WEB_URL?.includes('localhost');
+
+if (shouldUseProxy) {
+  const proxyUrl = process.env.HTTPS_PROXY;
+
+  try {
+    // 使用 undici 的 ProxyAgent 和 setGlobalDispatcher
+    const { ProxyAgent, setGlobalDispatcher } = require('undici');
+    const proxyAgent = new ProxyAgent(proxyUrl);
+    setGlobalDispatcher(proxyAgent);
+
+    console.log(`🔧 Development proxy enabled with undici: ${proxyUrl}`);
+  } catch (error) {
+    console.warn('Failed to set up undici proxy, falling back to environment variables:', error);
+
+    // 备用方案：通过环境变量设置代理
+    process.env.HTTP_PROXY = proxyUrl;
+    process.env.HTTPS_PROXY = proxyUrl;
+    process.env.ALL_PROXY = proxyUrl;
+
+    console.log(`🔧 Development proxy enabled with env vars: ${proxyUrl}`);
+  }
+}
 
 let providers: Provider[] = [];
 

@@ -9,7 +9,7 @@ import {
 import { BlogItem } from "@/types/blocks/blog";
 import { Home } from "lucide-react";
 import { Post } from "@/types/post";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/translations";
 
 export default function Crumb({ post }: { post: Post }) {
   const t = useTranslations();

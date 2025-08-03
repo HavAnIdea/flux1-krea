@@ -16,11 +16,6 @@
           "title": "Features",
           "url": "/#feature",
           "icon": "RiSparkling2Line"
-        },
-        {
-          "title": "Pricing",
-          "url": "/pricing",
-          "icon": "RiMoneyDollarCircleLine"
         }
       ]
     },
@@ -46,19 +41,12 @@
         "url": "https://flux1-krea.dev/app",
         "target": "_blank",
         "variant": "default"
-      },
-      {
-        "title": "View Pricing",
-        "icon": "RiMoneyDollarCircleLine",
-        "url": "/pricing",
-        "target": "_self",
-        "variant": "outline"
       }
     ],
     "show_happy_users": true,
     "show_badge": false
   },
-    "branding": {
+  "branding": {
     "name": "branding",
     "title": "Interactive AI Image Generator",
     "description": "Experience the power of AI image generation right here on our homepage",
@@ -72,7 +60,7 @@
       "input": {
         "placeholder": "Describe the image you want to create...",
         "minLength": 3,
-        "maxLength": 500
+        "maxLength": 1000
       },
       "button": {
         "title": "Generate",
@@ -82,57 +70,51 @@
       "examples": [
         {
           "id": "example-1",
-          "src": "/imgs/examples/landscape.jpg",
-          "alt": "Beautiful mountain landscape at sunset",
-          "prompt": "A serene mountain landscape at golden hour with misty valleys"
+          "src": "/imgs/examples/oldman.png",
+          "alt": "a example image",
+          "prompt": "A close-up portrait of a thoughtful elderly man in his 70s, his face a map of wrinkles and wisdom. He sits by a window on a cloudy day, the soft, diffused light highlighting the texture of his tweed jacket and the silver stubble on his chin. A single tear escapes his eye, capturing a moment of quiet reflection. Photorealistic, shallow depth of field, 50mm lens, a sense of melancholy and nostalgia."
         },
         {
-          "id": "example-2", 
-          "src": "/imgs/examples/portrait.jpg",
-          "alt": "Professional portrait of a person",
-          "prompt": "Professional headshot of a confident business person"
+          "id": "example-2",
+          "src": "/imgs/examples/rain.png",
+          "alt": "a example image",
+          "prompt": "A rain-slicked asphalt street in Tokyo at night, after a heavy downpour. The vibrant neon lights of Shinjuku signs are reflected brilliantly in the wet ground and puddles. A lone person walks away under a transparent umbrella. Slight motion blur on a passing car's taillights. Cinematic, moody, hyperrealistic, sharp focus on the water reflections."
         },
         {
           "id": "example-3",
-          "src": "/imgs/examples/abstract.jpg", 
-          "alt": "Abstract digital art",
-          "prompt": "Vibrant abstract digital art with flowing colors and geometric shapes"
+          "src": "/imgs/examples/food.png",
+          "alt": "a example image",
+          "prompt": "An overhead shot of a rustic wooden breakfast table in the morning. A ceramic bowl half-full of yogurt and berries, a few granola crumbs scattered on the table. A glass of iced coffee with condensation dripping down the side. Dappled sunlight filters through a nearby plant, casting soft shadows on the table. Photorealistic, high detail, warm and inviting atmosphere."
         },
         {
           "id": "example-4",
-          "src": "/imgs/examples/architecture.jpg",
-          "alt": "Modern architectural design",
-          "prompt": "Modern minimalist building with glass facades and clean lines"
+          "src": "/imgs/examples/light.png",
+          "alt": "a example image",
+          "prompt": "Interior of a vast, derelict factory. Concrete floors are cracked and dusty. A single, powerful beam of sunlight shines through a broken window high above, illuminating thick dust motes floating in the air. Rusted machinery sits in deep shadow. High contrast, atmospheric, volumetric lighting, photorealistic, sense of forgotten grandeur."
         },
         {
           "id": "example-5",
-          "src": "/imgs/examples/nature.jpg",
-          "alt": "Tropical forest scene",
-          "prompt": "Lush tropical rainforest with sunbeams filtering through the canopy"
+          "src": "/imgs/examples/plant.png",
+          "alt": "a example image",
+          "prompt": "Extreme macro photo of the forest floor after a morning rain. A vibrant green moss covers a fallen log. Tiny, glistening water droplets cling to the moss fibers and a small brown mushroom. A single ant is crawling over the log. The background is a soft, blurry bokeh of green and brown leaves. Shot on a 100mm macro lens, tack sharp focus, photorealistic."
         },
         {
           "id": "example-6",
-          "src": "/imgs/examples/fantasy.jpg",
-          "alt": "Fantasy creature illustration",
-          "prompt": "Majestic dragon soaring through clouds above ancient castle"
+          "src": "/imgs/examples/car.png",
+          "alt": "a example image",
+          "prompt": "A detailed shot of a vintage car's interior. Sunlight streams through the driver's side window, highlighting the texture of the worn brown leather seats and the polished grain of the wooden steering wheel. A set of old keys with a simple leather fob rests in the ignition. Dust is visible on the dashboard. Photorealistic, shallow depth of field, nostalgic feel."
         },
         {
           "id": "example-7",
-          "src": "/imgs/examples/space.jpg",
-          "alt": "Space exploration scene",
-          "prompt": "Astronaut floating in space with Earth and stars in background"
-        },
-        {
-          "id": "example-8",
-          "src": "/imgs/examples/food.jpg",
-          "alt": "Gourmet food photography",
-          "prompt": "Elegant gourmet dish with artistic plating and soft lighting"
+          "src": "/imgs/examples/watch.png",
+          "alt": "a example image",
+          "prompt": "Commercial product photography of a sophisticated chronograph watch resting on a dark, textured slate surface. Studio softbox lighting from the side subtly highlights the brushed steel of the casing and polished edges. The sapphire crystal glass is perfectly clear, revealing the intricate details of the matte black watch face, its subdials, and silver hands. A microscopic speck of dust sits on the crystal, visible only upon close inspection. The brown leather strap shows fine stitching and a natural, subtle wear pattern. Moody, luxurious, hyperrealistic, shot on a Hasselblad medium format camera."
         }
       ],
       "limits": {
         "showRemaining": true,
         "upgradePrompt": "Upgrade to Pro for unlimited generations",
-        "upgradeUrl": "/pricing",
+        "upgradeUrl": "",
         "messages": {
           "limitReached": "You've reached your daily limit of free generations",
           "speedLimited": "Please wait a moment before generating another image",
@@ -148,7 +130,12 @@
         "networkError": "Network connection failed. Please check your internet connection.",
         "generationFailed": "Image generation failed. Please try again with a different prompt.",
         "retryButton": "Try Again",
-        "validationError": "Please enter a valid prompt (3-500 characters)"
+        "validationError": "Please enter a valid prompt (3-500 characters)",
+        "anonymousLimitExceeded": "You've reached your limit of {limit} free generations. Please sign in for more.",
+        "dailyLimitExceeded": "You've reached your daily limit of {limit} generations. Resets at {resetTime} or upgrade to Pro for unlimited access.",
+        "fingerprintFailed": "Device fingerprint not available. Please refresh the page.",
+        "databaseError": "A system error occurred. Please try again later.",
+        "authenticationError": "Authentication failed. Please sign in again."
       }
     }
   },

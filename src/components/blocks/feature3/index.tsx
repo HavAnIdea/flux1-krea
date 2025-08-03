@@ -11,16 +11,16 @@ export default function Feature3({ section }: { section: SectionType }) {
   return (
     <section className="py-16">
       <div className="container px-8">
-        <div className="mb-16 max-w-xl px-8 lg:px-0">
+        <div className="mb-16 px-8 lg:px-0">
           {section.label && (
             <Badge variant="outline" className="mb-4">
               {section.label}
             </Badge>
           )}
-          <h2 className="mb-6 text-pretty text-3xl font-bold lg:text-4xl">
+          <h2 className="mb-6 text-3xl font-bold lg:text-4xl whitespace-nowrap">
             {section.title}
           </h2>
-          <p className="mb-4 max-w-xl text-muted-foreground lg:max-w-none lg:text-lg">
+          <p className="mb-4 text-muted-foreground lg:text-lg whitespace-nowrap">
             {section.description}
           </p>
         </div>

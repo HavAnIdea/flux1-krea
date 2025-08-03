@@ -4,14 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { ImageGeneratorConfig, GeneratorState } from "@/types/blocks/image-generator";
-import UsageLimits from "./UsageLimits";
+import { UsageStatus as UsageStatusType } from "@/lib/usage-limits";
+import UsageStatus from "./UsageStatus";
+import ErrorDisplay from "./ErrorDisplay";
 import { RiMagicLine, RiLoader4Line } from "react-icons/ri";
 
 interface LeftPanelProps {
   config: ImageGeneratorConfig;
   state: GeneratorState;
+  usageStatus: UsageStatusType | null;
   onPromptChange: (prompt: string) => void;
   onGenerate: () => void;
+  onRetry: () => void;
   onExampleClick: (prompt: string) => void;
   onScrollPause: (isPaused: boolean) => void;
 }
@@ -19,8 +23,10 @@ interface LeftPanelProps {
 export default function LeftPanel({
   config,
   state,
+  usageStatus,
   onPromptChange,
   onGenerate,
+  onRetry,
   onExampleClick,
   onScrollPause
 }: LeftPanelProps) {
@@ -29,7 +35,7 @@ export default function LeftPanel({
     !state.prompt.trim() ||
     state.prompt.length < (config.input.minLength || 3) ||
     state.prompt.length > (config.input.maxLength || 500) ||
-    state.remainingGenerations <= 0;
+    (usageStatus ? !usageStatus.canUse : false);
 
   return (
     <div className="space-y-4 h-full flex flex-col">
@@ -90,42 +96,17 @@ export default function LeftPanel({
 
           {/* Error Display */}
           {state.error && (
-            <div className="p-3 rounded-md bg-destructive/10 border border-destructive/20">
-              <p className="text-sm text-destructive">{state.error.message}</p>
-              {state.error.retryable && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onGenerate}
-                  className="mt-2"
-                >
-                  {config.errors.retryButton}
-                </Button>
-              )}
-              {state.error.upgradeRequired && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  asChild
-                  className="mt-2 ml-2"
-                >
-                  <a href={config.limits.upgradeUrl} target="_blank" rel="noopener noreferrer">
-                    Upgrade Now
-                  </a>
-                </Button>
-              )}
-            </div>
+            <ErrorDisplay
+              error={state.error}
+              onRetry={onRetry}
+            />
           )}
         </CardContent>
       </Card>
 
-      {/* Usage Limits - Compact */}
+      {/* Usage Status - Compact */}
       <div className="flex-shrink-0">
-        <UsageLimits
-          config={config}
-          userLimits={state.userLimits}
-          remainingGenerations={state.remainingGenerations}
-        />
+        <UsageStatus usageStatus={usageStatus} />
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ export default function ExampleScrollArea({
       <Carousel
         opts={{
           loop: true,
-          align: "center",
+          align: "start",
           dragFree: true
         }}
         plugins={[plugin.current]}
@@ -56,7 +56,7 @@ export default function ExampleScrollArea({
         onMouseLeave={handleMouseLeave}
         className="relative before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-8 before:bg-gradient-to-r before:from-background before:to-transparent after:absolute after:bottom-0 after:right-0 after:top-0 after:z-10 after:w-8 after:bg-gradient-to-l after:from-background after:to-transparent"
       >
-        <CarouselContent className="-ml-2 justify-center">
+        <CarouselContent className="-ml-2">
           {examples.map((example) => (
             <CarouselItem key={example.id} className="basis-auto pl-2">
               <ExampleImageItem

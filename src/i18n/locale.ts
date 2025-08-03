@@ -9,7 +9,7 @@ export const localeNames: any = {
 
 export const defaultLocale = "en";
 
-export const localePrefix = "as-needed";
+export const localePrefix = "never";
 
 export const localeDetection =
   process.env.NEXT_PUBLIC_LOCALE_DETECTION === "true";

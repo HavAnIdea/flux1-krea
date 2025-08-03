@@ -3,10 +3,10 @@ import "@/app/globals.css";
 import { MdOutlineHome } from "react-icons/md";
 import { Metadata } from "next";
 import React from "react";
-import { getTranslations } from "next-intl/server";
+import { getTranslations } from "@/lib/translations";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = getTranslations();
 
   return {
     title: {

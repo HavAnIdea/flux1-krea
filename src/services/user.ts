@@ -1,12 +1,9 @@
-import { CreditsAmount, CreditsTransType } from "./credit";
 import { findUserByEmail, findUserByUuid, insertUser } from "@/models/user";
 
 import { User } from "@/types/user";
 import { auth } from "@/auth";
-import { getIsoTimestr, getOneYearLaterTimestr } from "@/lib/time";
 import { getUserUuidByApiKey } from "@/models/apikey";
 import { headers } from "next/headers";
-import { increaseCredits } from "./credit";
 import { users } from "@/db/schema";
 import { getUuid } from "@/lib/hash";
 
@@ -29,13 +26,9 @@ export async function saveUser(user: User) {
 
       const dbUser = await insertUser(user as typeof users.$inferInsert);
 
-      // increase credits for new user, expire in one year
-      await increaseCredits({
-        user_uuid: user.uuid,
-        trans_type: CreditsTransType.NewUser,
-        credits: CreditsAmount.NewUserGet,
-        expired_at: getOneYearLaterTimestr(),
-      });
+      // Note: Credits system disabled - using usage limits instead
+      // Users get daily usage limits based on their plan (free/paid)
+      // See usage-limits system for implementation
 
       user = {
         ...(dbUser as unknown as User),

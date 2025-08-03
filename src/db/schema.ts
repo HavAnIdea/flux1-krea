@@ -29,6 +29,10 @@ export const users = pgTable(
     updated_at: timestamp({ withTimezone: true }),
     invited_by: varchar({ length: 255 }).notNull().default(""),
     is_affiliate: boolean().notNull().default(false),
+    // Usage limit fields
+    plan: varchar({ length: 50 }).notNull().default("free"), // 'free' | 'paid'
+    usage_count: integer().notNull().default(0), // Daily usage count
+    last_usage_date: varchar({ length: 10 }), // YYYY-MM-DD format
   },
   (table) => [
     uniqueIndex("email_provider_unique_idx").on(
@@ -127,4 +131,13 @@ export const feedbacks = pgTable("feedbacks", {
   user_uuid: varchar({ length: 255 }),
   content: text(),
   rating: integer(),
+});
+
+// Anonymous usage table
+export const anonymousUsage = pgTable("anonymous_usage", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  fingerprint_hash: varchar({ length: 64 }).notNull().unique(), // SHA-256 hash
+  usage_count: integer().notNull().default(0), // Total usage count
+  created_at: timestamp({ withTimezone: true }).defaultNow(),
+  updated_at: timestamp({ withTimezone: true }).defaultNow(),
 });

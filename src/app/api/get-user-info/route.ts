@@ -2,7 +2,6 @@ import { respData, respErr, respJson } from "@/lib/resp";
 
 import { findUserByUuid } from "@/models/user";
 import { getUserUuid } from "@/services/user";
-import { getUserCredits } from "@/services/credit";
 import { User } from "@/types/user";
 
 export async function POST(req: Request) {
@@ -17,11 +16,11 @@ export async function POST(req: Request) {
       return respErr("user not exist");
     }
 
-    const userCredits = await getUserCredits(user_uuid);
-
+    // Note: Credits system disabled - using usage limits instead
+    // User limits are managed through the usage-limits system
     const user = {
       ...(dbUser as unknown as User),
-      credits: userCredits,
+      // Remove credits field as it's no longer used
     };
 
     return respData(user);

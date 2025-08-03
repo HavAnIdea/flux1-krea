@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ImageGeneratorSection, GeneratorState, GenerationError, GenerationErrorType } from "@/types/blocks/image-generator";
+import { generateDeviceFingerprint } from "@/lib/fingerprint";
+import { generateImageWithLimits, getUserUsageStatus } from "@/actions/image-generation";
+import { UsageStatus } from "@/lib/usage-limits";
 import { imageGenerationService } from "@/services/image-generation";
 import LeftPanel from "./LeftPanel";
 import RightPanel from "./RightPanel";
@@ -35,6 +38,48 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
     remainingGenerations: 5,
     isScrollPaused: false
   });
+
+  // Device fingerprint state
+  const [fingerprint, setFingerprint] = useState<string>('');
+  const [usageStatus, setUsageStatus] = useState<UsageStatus | null>(null);
+
+  // Initialize device fingerprint and usage status
+  useEffect(() => {
+    const initializeFingerprint = async () => {
+      try {
+        const fp = await generateDeviceFingerprint();
+        setFingerprint(fp);
+
+        // Get initial usage status
+        const status = await getUserUsageStatus(fp);
+        setUsageStatus(status);
+
+        // Update state with usage status
+        setState(prev => ({
+          ...prev,
+          userLimits: {
+            isAuthenticated: status.userType === 'authenticated',
+            isPaid: status.plan === 'paid',
+            dailyLimit: status.dailyLimit,
+            remainingGenerations: status.remainingCount,
+            hasSpeedLimit: false
+          },
+          remainingGenerations: status.remainingCount
+        }));
+      } catch (error) {
+        console.error('Failed to initialize fingerprint:', error);
+        // Set fallback values
+        setUsageStatus({
+          userType: 'anonymous',
+          remainingCount: 0,
+          dailyLimit: 5,
+          canUse: false,
+        });
+      }
+    };
+
+    initializeFingerprint();
+  }, []);
 
   // Handle prompt change
   const handlePromptChange = useCallback((newPrompt: string) => {
@@ -93,15 +138,14 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
       return;
     }
 
-    // Check user limits
-    if (state.remainingGenerations <= 0) {
+    // Check if fingerprint is available
+    if (!fingerprint) {
       setState(prev => ({
         ...prev,
         error: {
-          type: GenerationErrorType.LIMIT_EXCEEDED,
-          message: generator.limits.messages.limitReached,
-          retryable: false,
-          upgradeRequired: true
+          type: GenerationErrorType.VALIDATION_ERROR,
+          message: "Device fingerprint not available. Please refresh the page.",
+          retryable: true
         }
       }));
       return;
@@ -116,21 +160,42 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
     }));
 
     try {
-      // Call the real Runware API
-      const result = await imageGenerationService.generateImage(state.prompt);
-      
+      // Call the new Server Action with usage limits
+      const result = await generateImageWithLimits(state.prompt.trim(), fingerprint);
+
       if (result.success && result.imageUrl) {
+        // Update usage status if provided
+        if (result.usageStatus) {
+          setUsageStatus(result.usageStatus);
+        }
+
         setState(prev => ({
           ...prev,
           isGenerating: false,
           generatedImage: result.imageUrl!,
-          remainingGenerations: Math.max(0, prev.remainingGenerations - 1),
+          remainingGenerations: result.usageStatus?.remainingCount || prev.remainingGenerations,
           userLimits: {
-            ...prev.userLimits,
-            remainingGenerations: Math.max(0, prev.userLimits.remainingGenerations - 1)
+            isAuthenticated: result.usageStatus?.userType === 'authenticated' || prev.userLimits.isAuthenticated,
+            isPaid: result.usageStatus?.plan === 'paid' || prev.userLimits.isPaid,
+            dailyLimit: result.usageStatus?.dailyLimit || prev.userLimits.dailyLimit,
+            remainingGenerations: result.usageStatus?.remainingCount || prev.userLimits.remainingGenerations,
+            hasSpeedLimit: false
           }
         }));
       } else {
+        // Update usage status even on failure if provided
+        if (result.usageStatus) {
+          setUsageStatus(result.usageStatus);
+          setState(prev => ({
+            ...prev,
+            remainingGenerations: result.usageStatus?.remainingCount || prev.remainingGenerations,
+            userLimits: {
+              ...prev.userLimits,
+              remainingGenerations: result.usageStatus?.remainingCount || prev.userLimits.remainingGenerations,
+            }
+          }));
+        }
+
         setState(prev => ({
           ...prev,
           isGenerating: false,
@@ -153,7 +218,7 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
         }
       }));
     }
-  }, [state.prompt, state.remainingGenerations, generator]);
+  }, [state.prompt, fingerprint, generator]);
 
   // Handle retry
   const handleRetry = useCallback(() => {
@@ -195,7 +260,7 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
             {generator.title}
           </h1>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-muted-foreground max-w-none mx-auto leading-relaxed">
             {generator.description}
           </p>
         </div>
@@ -207,8 +272,10 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
             <LeftPanel
               config={generator}
               state={state}
+              usageStatus={usageStatus}
               onPromptChange={handlePromptChange}
               onGenerate={handleGenerate}
+              onRetry={handleRetry}
               onExampleClick={handleExampleClick}
               onScrollPause={handleScrollPause}
             />
@@ -226,14 +293,13 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
         </div>
 
         {/* Example Images Section - Full Width */}
-        <div className="space-y-4">
-          <div className="flex items-center justify-center gap-2">
-            <h5 className="text-lg font-medium">Try these examples</h5>
-            <span className="px-2 py-1 text-xs bg-secondary text-secondary-foreground rounded-md">
-              Click to use
-            </span>
+        <section className="py-4">
+          <div className="flex flex-col items-center gap-2">
+            <h2 className="text-center text-2xl font-semibold lg:text-3xl">
+              Try these examples
+            </h2>
           </div>
-          <div className="max-w-6xl mx-auto">
+          <div className="lg:container">
             <ExampleScrollArea
               examples={generator.examples}
               onExampleClick={handleExampleClick}
@@ -241,7 +307,7 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
               isPaused={state.isScrollPaused}
             />
           </div>
-        </div>
+        </section>
       </div>
     </section>
   );

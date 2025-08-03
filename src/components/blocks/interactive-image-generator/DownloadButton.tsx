@@ -26,7 +26,7 @@ export default function DownloadButton({
     try {
       // For mobile devices, we need to handle download differently
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      
+
       if (isMobile) {
         // Mobile download: open in new tab for user to save manually
         const link = document.createElement('a');
@@ -39,15 +39,10 @@ export default function DownloadButton({
       } else {
         // Desktop download: direct download
         try {
-          // 确保使用完整的URL（如果是相对路径，添加域名）
-          const fullUrl = imageUrl.startsWith('/') 
-            ? `${window.location.origin}${imageUrl}` 
-            : imageUrl;
-
           // Try to fetch the image and create a blob for better download experience
-          const response = await fetch(fullUrl);
+          const response = await fetch(imageUrl);
           const blob = await response.blob();
-          
+
           const url = window.URL.createObjectURL(blob);
           const link = document.createElement('a');
           link.href = url;
@@ -58,11 +53,8 @@ export default function DownloadButton({
           window.URL.revokeObjectURL(url);
         } catch (fetchError) {
           // Fallback to direct link download
-          const fullUrl = imageUrl.startsWith('/') 
-            ? `${window.location.origin}${imageUrl}` 
-            : imageUrl;
           const link = document.createElement('a');
-          link.href = fullUrl;
+          link.href = imageUrl;
           link.download = `generated-image-${Date.now()}.png`;
           document.body.appendChild(link);
           link.click();
@@ -74,7 +66,7 @@ export default function DownloadButton({
       onDownload();
 
       setDownloadState('success');
-      
+
       // Reset state after showing success
       setTimeout(() => {
         setDownloadState('idle');
@@ -83,7 +75,7 @@ export default function DownloadButton({
     } catch (error) {
       console.error('Download failed:', error);
       setDownloadState('error');
-      
+
       // Reset state after showing error
       setTimeout(() => {
         setDownloadState('idle');
