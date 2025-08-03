@@ -44,7 +44,10 @@ export default async function RootLayout({
           <meta name="google-adsense-account" content={googleAdsenseCode} />
         )}
 
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="alternate" hrefLang="en" href={webUrl} />
         <link rel="alternate" hrefLang="x-default" href={webUrl} />
       </head>
