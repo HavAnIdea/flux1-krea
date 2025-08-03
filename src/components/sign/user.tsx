@@ -11,10 +11,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import { User } from "@/types/user";
 import { signOut } from "next-auth/react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/translations";
 import { NavItem } from "@/types/blocks/base";
 
 export default function SignUser({ user }: { user: User }) {

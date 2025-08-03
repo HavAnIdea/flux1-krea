@@ -8,7 +8,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Nav as NavType } from "@/types/blocks/base";
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import Icon from "@/components/icon";
 import { usePathname } from "next/navigation";
 

@@ -28,7 +28,7 @@ import Editor from "@/components/blocks/editor";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { useRouter } from "@/i18n/routing";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 

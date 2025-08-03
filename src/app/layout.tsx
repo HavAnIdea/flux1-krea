@@ -1,11 +1,10 @@
 import "@/app/globals.css";
 
-import { getMessages, getTranslations } from "next-intl/server";
+import { getTranslations } from "@/lib/translations";
 import { AppContextProvider } from "@/contexts/app";
 import { Inter as FontSans } from "next/font/google";
 import { Metadata } from "next";
 import { NextAuthSessionProvider } from "@/auth/session";
-import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider } from "@/providers/theme";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +14,7 @@ const fontSans = FontSans({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+  const t = getTranslations();
 
   return {
     title: {
@@ -32,7 +31,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const messages = await getMessages();
   const webUrl = process.env.NEXT_PUBLIC_WEB_URL || "";
   const googleAdsenseCode = process.env.NEXT_PUBLIC_GOOGLE_ADCODE || "";
 
@@ -57,15 +55,13 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <NextIntlClientProvider messages={messages}>
-          <NextAuthSessionProvider>
-            <AppContextProvider>
-              <ThemeProvider attribute="class" disableTransitionOnChange>
-                {children}
-              </ThemeProvider>
-            </AppContextProvider>
-          </NextAuthSessionProvider>
-        </NextIntlClientProvider>
+        <NextAuthSessionProvider>
+          <AppContextProvider>
+            <ThemeProvider attribute="class" disableTransitionOnChange>
+              {children}
+            </ThemeProvider>
+          </AppContextProvider>
+        </NextAuthSessionProvider>
       </body>
     </html>
   );

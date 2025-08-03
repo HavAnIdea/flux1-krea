@@ -10,7 +10,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Nav } from "@/types/blocks/base";
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import Icon from "@/components/icon";
 
 export function BottomNav({

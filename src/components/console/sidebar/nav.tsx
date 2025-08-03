@@ -1,7 +1,7 @@
 "use client";
 
 import Icon from "@/components/icon";
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import { NavItem } from "@/types/blocks/base";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";

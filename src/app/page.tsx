@@ -5,10 +5,10 @@ import Feature from "@/components/blocks/feature";
 import Footer from "@/components/blocks/footer";
 import Header from "@/components/blocks/header";
 import { getLandingPage } from "@/services/page";
-import { getTranslations } from "next-intl/server";
+import { getTranslations } from "@/lib/translations";
 
 export async function generateMetadata() {
-  const t = await getTranslations();
+  const t = getTranslations();
   const canonicalUrl = process.env.NEXT_PUBLIC_WEB_URL || '';
 
   return {

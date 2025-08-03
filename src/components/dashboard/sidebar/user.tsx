@@ -2,7 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronsUpDown, LogOut } from "lucide-react";
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,7 +24,7 @@ import Icon from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { signOut } from "next-auth/react";
 import { useAppContext } from "@/contexts/app";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/translations";
 import { Account } from "@/types/blocks/base";
 import { Fragment } from "react";
 

@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/sidebar";
 import Nav from "./nav";
 import { Sidebar as SidebarType } from "@/types/blocks/sidebar";
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import Image from "next/image";
 import SidebarUser from "./user";
 import Footer from "./footer";

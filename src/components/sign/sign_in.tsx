@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/contexts/app";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/translations";
 
 export default function SignIn() {
   const t = useTranslations();

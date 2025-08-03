@@ -27,7 +27,7 @@ import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
 import { useAppContext } from "@/contexts/app";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/translations";
 
 export default function SignModal() {
   const t = useTranslations();

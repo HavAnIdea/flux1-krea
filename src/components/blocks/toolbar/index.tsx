@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Button as ButtonType } from "@/types/blocks/base";
 import Icon from "@/components/icon";
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 
 export default function Toolbar({ items }: { items?: ButtonType[] }) {
   return (

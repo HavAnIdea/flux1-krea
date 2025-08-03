@@ -1,12 +1,9 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
-import createNextIntlPlugin from "next-intl/plugin";
 import mdx from "@next/mdx";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
-
-const withNextIntl = createNextIntlPlugin();
 
 const withMDX = mdx({
   options: {
@@ -53,4 +50,4 @@ const configWithMDX = {
   },
 };
 
-export default withBundleAnalyzer(withNextIntl(withMDX(configWithMDX)));
+export default withBundleAnalyzer(withMDX(configWithMDX));

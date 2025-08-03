@@ -3,7 +3,7 @@
 import SignIn from "./sign_in";
 import User from "./user";
 import { useAppContext } from "@/contexts/app";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/lib/translations";
 
 export default function SignToggle() {
   const t = useTranslations();
