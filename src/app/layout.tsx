@@ -48,6 +48,19 @@ export default async function RootLayout({
         <link rel="apple-touch-icon" href="/logo.png" />
         <link rel="alternate" hrefLang="en" href={webUrl} />
         <link rel="alternate" hrefLang="x-default" href={webUrl} />
+
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-82RYM3ZMC3"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-82RYM3ZMC3');
+            `,
+          }}
+        />
       </head>
       <body
         className={cn(
