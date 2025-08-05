@@ -51,6 +51,7 @@ export class CreemService {
       console.log('Request ID:', requestId);
       console.log('Success URL:', successUrl);
       console.log('API Key (前4位):', this.apiKey.substring(0, 4) + '...');
+      console.log('Request Body:', JSON.stringify(requestData, null, 2));
 
       const response = await fetch(`${this.apiUrl}/checkouts`, {
         method: 'POST',
@@ -94,18 +95,24 @@ export class CreemService {
     try {
       const { signature, ...otherParams } = params;
       
-      // 按字母顺序排序参数
-      const sortedParams = Object.keys(otherParams)
-        .sort()
+      // 按照官方文档生成签名（保持原始顺序）
+      const paramOrder = ['request_id', 'checkout_id', 'order_id', 'customer_id', 'subscription_id', 'product_id'];
+      const data = paramOrder
+        .filter(key => otherParams[key as keyof typeof otherParams] !== undefined && otherParams[key as keyof typeof otherParams] !== null)
         .map(key => `${key}=${otherParams[key as keyof typeof otherParams]}`)
-        .join('&');
-
-      // 使用 API key 创建 HMAC 签名
+        .concat(`salt=${this.apiKey}`)
+        .join('|');
+      
       const expectedSignature = crypto
-        .createHmac('sha256', this.apiKey)
-        .update(sortedParams)
+        .createHash('sha256')
+        .update(data)
         .digest('hex');
-
+      
+      console.log('🔍 签名验证调试:');
+      console.log('输入数据:', data);
+      console.log('预期签名:', expectedSignature);
+      console.log('实际签名:', signature);
+      
       return signature === expectedSignature;
     } catch (error) {
       console.error('Error verifying Creem signature:', error);
@@ -162,6 +169,55 @@ export class CreemService {
     } catch (error) {
       console.error('Error parsing Creem return URL params:', error);
       return null;
+    }
+  }
+
+  /**
+   * 从 URL 直接验证签名
+   */
+  verifySignatureFromUrl(url: string): boolean {
+    if (!this.apiKey) {
+      console.error('CREEM_API_KEY is required for signature verification');
+      return false;
+    }
+    
+    try {
+      const urlObj = new URL(url);
+      const params = urlObj.searchParams;
+      
+      // 获取签名
+      const signature = params.get('signature');
+      if (!signature) {
+        throw new Error('Missing signature in URL');
+      }
+      
+      // 按照原始 URL 中的参数顺序构建签名字符串
+      const signatureParams: string[] = [];
+      params.forEach((value, key) => {
+        if (key !== 'signature' && value !== null && value !== undefined) {
+          signatureParams.push(`${key}=${value}`);
+        }
+      });
+      
+      // 添加 salt
+      signatureParams.push(`salt=${this.apiKey}`);
+      
+      const data = signatureParams.join('|');
+      const expectedSignature = crypto
+        .createHash('sha256')
+        .update(data)
+        .digest('hex');
+      
+      console.log('🔍 URL 签名验证调试:');
+      console.log('URL 参数顺序:', Array.from(params.keys()).filter(k => k !== 'signature'));
+      console.log('输入数据:', data);
+      console.log('预期签名:', expectedSignature);
+      console.log('实际签名:', signature);
+      
+      return signature === expectedSignature;
+    } catch (error) {
+      console.error('Error verifying Creem signature from URL:', error);
+      return false;
     }
   }
 
@@ -264,6 +320,52 @@ export class CreemService {
   getCancelUrl(): string {
     const baseUrl = process.env.NEXT_PUBLIC_WEB_URL || 'http://localhost:3000';
     return `${baseUrl}/#pricing`;
+  }
+
+  /**
+   * 测试签名生成 - 仅用于调试
+   */
+  testSignatureGeneration(): void {
+    if (!this.apiKey) {
+      console.error('CREEM_API_KEY is required for signature test');
+      return;
+    }
+
+    // 模拟返回 URL 参数
+    const testParams = {
+      checkout_id: 'chk_123456789',
+      order_id: 'ord_123456789',
+      customer_id: 'cus_123456789',
+      product_id: 'prod_123456789',
+      request_id: 'user_1_plan_1',
+    };
+
+    console.log('🧪 测试签名生成:');
+    console.log('测试参数:', testParams);
+
+    // 生成签名
+    const data = Object.entries(testParams)
+      .filter(([_, value]) => value !== undefined && value !== null)
+      .map(([key, value]) => `${key}=${value}`)
+      .concat(`salt=${this.apiKey}`)
+      .join('|');
+
+    const signature = crypto
+      .createHash('sha256')
+      .update(data)
+      .digest('hex');
+
+    console.log('生成的签名字符串:', data);
+    console.log('生成的签名:', signature);
+
+    // 验证签名
+    const verificationParams = {
+      ...testParams,
+      signature,
+    };
+
+    const isValid = this.verifyReturnUrlSignature(verificationParams);
+    console.log('签名验证结果:', isValid ? '✅ 成功' : '❌ 失败');
   }
 }
 

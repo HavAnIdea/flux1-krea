@@ -7,6 +7,11 @@ export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
     
+    // 直接从 URL 验证签名
+    if (!creemService.verifySignatureFromUrl(url.toString())) {
+      return respErr("Invalid signature");
+    }
+    
     // 解析返回 URL 参数
     const params = creemService.parseReturnUrlParams(url.toString());
     if (!params) {
