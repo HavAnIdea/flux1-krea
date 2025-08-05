@@ -125,7 +125,7 @@ export default function DynamicPricing({
   const proFeatures = [
     "Unlimited image generation",
     "High-definition images",
-    "All image sizes and ratios",
+    // "All image sizes and ratios",
     "No watermarks",
     "Priority access to new features",
     "Priority support",
