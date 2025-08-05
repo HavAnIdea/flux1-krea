@@ -4,6 +4,7 @@ import FAQ from "@/components/blocks/faq";
 import Feature from "@/components/blocks/feature";
 import Footer from "@/components/blocks/footer";
 import Header from "@/components/blocks/header";
+import DynamicPricing from "@/components/blocks/pricing/DynamicPricing";
 import { getLandingPage } from "@/services/page";
 import { getTranslations } from "@/lib/translations";
 
@@ -30,6 +31,12 @@ export default async function LandingPage() {
       <main className="overflow-x-hidden">
         {page.branding && <InteractiveImageGenerator section={page.branding} />}
         {page.feature && <Feature section={page.feature} />}
+        {page.pricing && !page.pricing.disabled && (
+          <DynamicPricing 
+            title={page.pricing.title}
+            description={page.pricing.description}
+          />
+        )}
         {page.faq && <FAQ section={page.faq} />}
         {page.cta && <CTA section={page.cta} />}
       </main>

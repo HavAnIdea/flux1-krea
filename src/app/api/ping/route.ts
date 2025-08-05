@@ -1,8 +1,4 @@
-import {
-  CreditsAmount,
-  CreditsTransType,
-  decreaseCredits,
-} from "@/services/credit";
+// Credit system removed
 import { respData, respErr } from "@/lib/resp";
 
 import { getUserUuid } from "@/services/user";
@@ -19,12 +15,7 @@ export async function POST(req: Request) {
       return respErr("no auth");
     }
 
-    // decrease credits for ping
-    await decreaseCredits({
-      user_uuid,
-      trans_type: CreditsTransType.Ping,
-      credits: CreditsAmount.PingCost,
-    });
+    // Credit system removed - ping is now free
 
     return respData({
       pong: `received message: ${message}`,

@@ -8,6 +8,7 @@ import {
   timestamp,
   unique,
   uniqueIndex,
+  decimal,
 } from "drizzle-orm/pg-core";
 
 // Users table
@@ -42,34 +43,7 @@ export const users = pgTable(
   ]
 );
 
-// Orders table
-export const orders = pgTable("orders", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  order_no: varchar({ length: 255 }).notNull().unique(),
-  created_at: timestamp({ withTimezone: true }),
-  user_uuid: varchar({ length: 255 }).notNull().default(""),
-  user_email: varchar({ length: 255 }).notNull().default(""),
-  amount: integer().notNull(),
-  interval: varchar({ length: 50 }),
-  expired_at: timestamp({ withTimezone: true }),
-  status: varchar({ length: 50 }).notNull(),
-  stripe_session_id: varchar({ length: 255 }),
-  credits: integer().notNull(),
-  currency: varchar({ length: 50 }),
-  sub_id: varchar({ length: 255 }),
-  sub_interval_count: integer(),
-  sub_cycle_anchor: integer(),
-  sub_period_end: integer(),
-  sub_period_start: integer(),
-  sub_times: integer(),
-  product_id: varchar({ length: 255 }),
-  product_name: varchar({ length: 255 }),
-  valid_months: integer(),
-  order_detail: text(),
-  paid_at: timestamp({ withTimezone: true }),
-  paid_email: varchar({ length: 255 }),
-  paid_detail: text(),
-});
+// Orders table removed - replaced by subscription system
 
 // API Keys table
 export const apikeys = pgTable("apikeys", {
@@ -81,17 +55,7 @@ export const apikeys = pgTable("apikeys", {
   status: varchar({ length: 50 }),
 });
 
-// Credits table
-export const credits = pgTable("credits", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  trans_no: varchar({ length: 255 }).notNull().unique(),
-  created_at: timestamp({ withTimezone: true }),
-  user_uuid: varchar({ length: 255 }).notNull(),
-  trans_type: varchar({ length: 50 }).notNull(),
-  credits: integer().notNull(),
-  order_no: varchar({ length: 255 }),
-  expired_at: timestamp({ withTimezone: true }),
-});
+// Credits table removed - no credit system
 
 // Posts table
 export const posts = pgTable("posts", {
@@ -140,4 +104,32 @@ export const anonymousUsage = pgTable("anonymous_usage", {
   usage_count: integer().notNull().default(0), // Total usage count
   created_at: timestamp({ withTimezone: true }).defaultNow(),
   updated_at: timestamp({ withTimezone: true }).defaultNow(),
+});
+
+// Subscription plans table
+export const subscriptionPlans = pgTable("subscription_plans", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar({ length: 100 }).notNull().unique(),
+  type: varchar({ length: 50 }).notNull(),
+  price: integer().notNull(),
+  currency: varchar({ length: 3 }).notNull().default("USD"),
+  period: varchar({ length: 50 }).notNull(),
+  product_id: varchar({ length: 255 }),
+  created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+});
+
+// User subscriptions table
+export const userSubscriptions = pgTable("user_subscriptions", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  user_id: integer().notNull(),
+  plan_id: integer().notNull(),
+  start_date: timestamp({ withTimezone: true }).notNull(),
+  end_date: timestamp({ withTimezone: true }).notNull(),
+  payment_status: varchar({ length: 50 }).notNull(),
+  payment_method: varchar({ length: 50 }),
+  order_id: varchar({ length: 255 }),
+  amount_paid: decimal({ precision: 10, scale: 2 }).notNull(),
+  is_active: boolean().notNull().default(true),
+  created_at: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  updated_at: timestamp({ withTimezone: true }),
 });

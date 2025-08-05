@@ -3,7 +3,7 @@ import {
   getAffiliatesByUserUuid,
   getAffiliateSummary,
 } from "@/models/affiliate";
-import { getOrdersByPaidEmail, getOrdersByUserUuid } from "@/models/order";
+// Order system removed - using subscription system now
 import { getUserEmail, getUserUuid } from "@/services/user";
 
 import Invite from "@/components/invite";
@@ -32,51 +32,9 @@ export default async function () {
     redirect(`/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
   }
 
-  let orders = await getOrdersByUserUuid(user_uuid);
-  if (!orders || orders.length === 0) {
-    orders = await getOrdersByPaidEmail(user_email);
-  }
-
-  user.is_affiliate = true;
-
-  if (!orders || orders.length === 0) {
-    // not bought
-    if (!user.is_affiliate) {
-      // no right
-      return (
-        <div className="text-center flex flex-col items-center justify-center h-full py-16 gap-4">
-          <RiEmotionSadFill className="w-8 h-8" />
-          <span>{t("my_invites.no_orders")}</span>
-        </div>
-      );
-    }
-  } else {
-    // bought
-    let is_affiliate = false;
-    for (const order of orders) {
-      if (order.product_id === "premium") {
-        is_affiliate = true;
-        break;
-      }
-    }
-
-    if (!is_affiliate && !user.is_affiliate) {
-      return (
-        <div className="text-center flex flex-col items-center justify-center h-full py-16 gap-4">
-          <RiEmotionSadFill className="w-8 h-8" />
-          <span>{t("my_invites.no_affiliates")}</span>
-          <Link
-            href="https://discord.gg/HQNnrzjZQS"
-            target="_blank"
-            className="flex items-center gap-1 font-semibold text-sm text-primary border border-primary rounded-md px-4 py-2"
-          >
-            <RiDiscordFill className="text-xl" />
-            Discord
-          </Link>
-        </div>
-      );
-    }
-  }
+  // Simplified affiliate access - now based on subscription system
+  // TODO: Implement subscription-based affiliate eligibility check
+  user.is_affiliate = true; // For now, allow all users to access affiliate features
 
   const affiliates = await getAffiliatesByUserUuid(user_uuid);
 

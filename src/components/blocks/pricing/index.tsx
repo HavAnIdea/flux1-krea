@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/icon";
 import { Label } from "@/components/ui/label";
-import { loadStripe } from "@stripe/stripe-js";
+// Removed Stripe import
 import { toast } from "sonner";
 import { useAppContext } from "@/contexts/app";
 
@@ -24,38 +24,47 @@ export default function Pricing({ pricing }: { pricing: PricingType }) {
   const [isLoading, setIsLoading] = useState(false);
   const [productId, setProductId] = useState<string | null>(null);
 
-  const handleCheckout = async (item: PricingItem, cn_pay: boolean = false) => {
+  const handleCheckout = async (item: PricingItem) => {
     try {
       if (!user) {
         setShowSignModal(true);
         return;
       }
 
-      const params = {
-        product_id: item.product_id,
-        product_name: item.product_name,
-        credits: item.credits,
-        interval: item.interval,
-        amount: cn_pay ? item.cn_amount : item.amount,
-        currency: cn_pay ? "cny" : item.currency,
-        valid_months: item.valid_months,
-      };
+      // 从 product_id 中提取 plan_id (假设 product_id 对应我们数据库中的套餐)
+      // 这里需要根据实际的映射关系来调整
+      let planId: number;
+      
+      // 简单的映射逻辑，实际项目中可能需要更复杂的映射
+      switch (item.product_id) {
+        case 'starter':
+          planId = 1;
+          break;
+        case 'standard':
+          planId = 2;
+          break;
+        case 'premium':
+          planId = 3;
+          break;
+        default:
+          toast.error("Invalid product");
+          return;
+      }
 
       setIsLoading(true);
       setProductId(item.product_id);
 
-      const response = await fetch("/api/checkout", {
+      const response = await fetch("/api/creem-checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(params),
+        body: JSON.stringify({ plan_id: planId }),
       });
 
       if (response.status === 401) {
         setIsLoading(false);
         setProductId(null);
-
         setShowSignModal(true);
         return;
       }
@@ -66,24 +75,12 @@ export default function Pricing({ pricing }: { pricing: PricingType }) {
         return;
       }
 
-      const { public_key, session_id } = data;
+      const { checkout_url } = data;
 
-      const stripe = await loadStripe(public_key);
-      if (!stripe) {
-        toast.error("checkout failed");
-        return;
-      }
-
-      const result = await stripe.redirectToCheckout({
-        sessionId: session_id,
-      });
-
-      if (result.error) {
-        toast.error(result.error.message);
-      }
+      // 直接重定向到 Creem 支付页面
+      window.location.href = checkout_url;
     } catch (e) {
       console.log("checkout failed: ", e);
-
       toast.error("checkout failed");
     } finally {
       setIsLoading(false);
@@ -231,26 +228,6 @@ export default function Pricing({ pricing }: { pricing: PricingType }) {
                       )}
                     </div>
                     <div className="flex flex-col gap-2">
-                      {item.cn_amount && item.cn_amount > 0 ? (
-                        <div className="flex items-center gap-x-2 mt-2">
-                          <span className="text-sm">人民币支付 👉</span>
-                          <div
-                            className="inline-block p-2 hover:cursor-pointer hover:bg-base-200 rounded-md"
-                            onClick={() => {
-                              if (isLoading) {
-                                return;
-                              }
-                              handleCheckout(item, true);
-                            }}
-                          >
-                            <img
-                              src="/imgs/cnpay.png"
-                              alt="cnpay"
-                              className="w-20 h-10 rounded-lg"
-                            />
-                          </div>
-                        </div>
-                      ) : null}
                       {item.button && (
                         <Button
                           className="w-full flex items-center justify-center gap-2 font-semibold"

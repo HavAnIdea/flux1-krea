@@ -16,6 +16,11 @@
           "title": "Features",
           "url": "/#feature",
           "icon": "RiSparkling2Line"
+        },
+        {
+          "title": "Pricing",
+          "url": "/#pricing",
+          "icon": "RiPriceTag3Line"
         }
       ]
     },
@@ -273,6 +278,12 @@
         "icon": "RiZoomInLine"
       }
     ]
+  },
+  "pricing": {
+    "disabled": false,
+    "name": "pricing",
+    "title": "Choose Your Plan",
+    "description": "Start for free, upgrade when you need more power"
   },
   "stats": {
     "name": "stats",

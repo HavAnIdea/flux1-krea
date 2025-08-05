@@ -3,26 +3,24 @@ import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import { NextAuthConfig } from "next-auth";
 import { Provider } from "next-auth/providers/index";
-import { User } from "@/types/user";
-import { getClientIp } from "@/lib/ip";
-import { getIsoTimestr } from "@/lib/time";
-import { getUuid } from "@/lib/hash";
-import { saveUser } from "@/services/user";
 import { handleSignInUser } from "./handler";
-// 代理配置 - 只在本地开发环境使用环境变量方式
+
+// 本地开发代理配置
 if (
   process.env.NODE_ENV === 'development' &&
-  process.env.HTTPS_PROXY &&
-  process.env.NEXT_PUBLIC_WEB_URL?.includes('localhost')
+  process.env.HTTPS_PROXY
 ) {
   const proxyUrl = process.env.HTTPS_PROXY;
+  process.env.HTTP_PROXY = proxyUrl;
+  process.env.HTTPS_PROXY = proxyUrl;
+  process.env.ALL_PROXY = proxyUrl;
 
-  if (proxyUrl) {
-    // 使用环境变量设置代理，避免依赖 undici 包
-    process.env.HTTP_PROXY = proxyUrl;
-    process.env.HTTPS_PROXY = proxyUrl;
-    process.env.ALL_PROXY = proxyUrl;
-    console.log(`🔧 Development proxy enabled: ${proxyUrl}`);
+  try {
+    const { setGlobalDispatcher, ProxyAgent } = require('undici');
+    const proxyAgent = new ProxyAgent(proxyUrl);
+    setGlobalDispatcher(proxyAgent);
+  } catch (error) {
+    // 静默处理错误，使用环境变量作为备用方案
   }
 }
 
@@ -102,6 +100,15 @@ if (
     GoogleProvider({
       clientId: process.env.AUTH_GOOGLE_ID,
       clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      // 明确指定 callback URL
+      ...(process.env.NEXT_PUBLIC_WEB_URL && {
+        callbackUrl: `${process.env.NEXT_PUBLIC_WEB_URL}/api/auth/callback/google`,
+        authorization: {
+          params: {
+            redirect_uri: `${process.env.NEXT_PUBLIC_WEB_URL}/api/auth/callback/google`,
+          },
+        },
+      }),
     })
   );
 }
@@ -116,6 +123,14 @@ if (
     GitHubProvider({
       clientId: process.env.AUTH_GITHUB_ID,
       clientSecret: process.env.AUTH_GITHUB_SECRET,
+      // 使用环境变量中的 URL 作为回调地址的基础
+      ...(process.env.NEXT_PUBLIC_WEB_URL && {
+        authorization: {
+          params: {
+            redirect_uri: `${process.env.NEXT_PUBLIC_WEB_URL}/api/auth/callback/github`,
+          },
+        },
+      }),
     })
   );
 }
@@ -136,24 +151,21 @@ export const authOptions: NextAuthConfig = {
   pages: {
     signIn: "/auth/signin",
   },
+  // 使用环境变量中的 URL 作为 base URL
+  basePath: "/api/auth",
+  trustHost: true,
+  secret: process.env.AUTH_SECRET,
+  useSecureCookies: true,
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      const isAllowedToSignIn = true;
-      if (isAllowedToSignIn) {
-        return true;
-      } else {
-        // Return false to display a default error message
-        return false;
-        // Or you can return a URL to redirect to:
-        // return '/unauthorized'
-      }
+    async signIn() {
+      return true;
     },
     async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
+      // 使用环境变量中的 URL 作为 baseUrl
+      const appUrl = process.env.NEXT_PUBLIC_WEB_URL;
+      if (url.startsWith("/")) return `${appUrl || baseUrl}${url}`;
+      else if (new URL(url).origin === (appUrl || baseUrl)) return url;
+      return appUrl || baseUrl;
     },
     async session({ session, token, user }) {
       if (token && token.user && token.user) {

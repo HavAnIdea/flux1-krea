@@ -1,14 +1,14 @@
 import DataCards from "@/components/blocks/data-cards";
 import DataCharts from "@/components/blocks/data-charts";
 import Header from "@/components/dashboard/header";
-import { getOrderCountByDate, getPaidOrdersTotal } from "@/models/order";
+// Order system removed - using subscription system now
 import { getUserCountByDate, getUsersTotal } from "@/models/user";
 import { getFeedbacksTotal } from "@/models/feedback";
 import { getPostsTotal } from "@/models/post";
 import { DataCard } from "@/types/blocks/base";
 
 export default async function () {
-  const totalPaidOrders = await getPaidOrdersTotal();
+  const totalPaidOrders = 0; // TODO: Implement subscription count
   const totalUsers = await getUsersTotal();
   const totalFeedbacks = await getFeedbacksTotal();
   const totalPosts = await getPostsTotal();
@@ -21,10 +21,10 @@ export default async function () {
       description: "Total users registered in the system",
     },
     {
-      title: "Paid Orders",
+      title: "Active Subscriptions",
       label: "",
       value: (totalPaidOrders || 0).toString(),
-      description: "User Paid Orders in total",
+      description: "Active user subscriptions",
     },
     {
       title: "System Posts",
@@ -43,12 +43,10 @@ export default async function () {
   // Get data for the last 30 days
   const startTime = new Date();
   startTime.setDate(startTime.getDate() - 90);
-  const orders = await getOrderCountByDate(startTime.toISOString(), "paid");
   const users = await getUserCountByDate(startTime.toISOString());
 
-  // Merge the data into a single array
+  // Create chart data with users only for now
   const allDates = new Set([
-    ...(orders ? Array.from(orders.keys()) : []),
     ...(users ? Array.from(users.keys()) : []),
   ]);
 
@@ -57,12 +55,12 @@ export default async function () {
     .map((date) => ({
       date,
       users: users?.get(date) || 0,
-      orders: orders?.get(date) || 0,
+      subscriptions: 0, // TODO: Implement subscription count by date
     }));
 
   const fields = [
     { key: "users", label: "Users", color: "var(--primary)" },
-    { key: "orders", label: "Orders", color: "var(--secondary)" },
+    { key: "subscriptions", label: "Subscriptions", color: "var(--secondary)" },
   ];
 
   return (
@@ -76,8 +74,8 @@ export default async function () {
               <DataCharts
                 data={data}
                 fields={fields}
-                title="Users and Orders Overview"
-                description="Daily users and orders data"
+                title="Users and Subscriptions Overview"
+                description="Daily users and subscriptions data"
                 defaultTimeRange="90d"
               />
             </div>
