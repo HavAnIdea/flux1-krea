@@ -212,22 +212,13 @@ function PaymentSuccessContent() {
           {/* 下一步操作 */}
           <div className="space-y-3">
             <h4 className="font-medium">What's next?</h4>
-            <div className="grid gap-3 md:grid-cols-2">
-              <Button 
-                onClick={() => window.location.href = "/"}
-                className="w-full"
-              >
-                Start Using Features
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button 
-                variant="outline"
-                onClick={() => window.location.href = "/subscription"}
-                className="w-full"
-              >
-                Manage Subscription
-              </Button>
-            </div>
+            <Button 
+              onClick={() => window.location.href = "/"}
+              className="w-full"
+            >
+              Start Using Features
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
           </div>
 
           {/* 支持信息 */}
