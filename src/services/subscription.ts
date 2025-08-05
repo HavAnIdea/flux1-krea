@@ -6,6 +6,7 @@ import {
   getSubscriptionByOrderId,
   deactivateExpiredSubscriptions,
 } from "@/models/user-subscriptions";
+import { findUserByUuid, findUserById, updateUserPlan } from "@/models/user";
 import { getSubscriptionPlanById } from "@/models/subscription-plans";
 import {
   UserSubscription,
@@ -156,7 +157,22 @@ export class SubscriptionService {
         amount_paid: amountPaid,
       };
 
-      return await this.createSubscription(subscriptionData);
+      // 创建订阅记录
+      const subscription = await this.createSubscription(subscriptionData);
+      
+      // 更新用户的 plan 字段
+      try {
+        const user = await findUserByUuid(userId.toString());
+        if (user) {
+          await updateUserPlan(user.uuid, 'paid');
+          console.log(`Updated user ${user.uuid} plan to 'paid'`);
+        }
+      } catch (updateError) {
+        console.error('Error updating user plan:', updateError);
+        // 不抛出错误，因为订阅已经创建成功
+      }
+      
+      return subscription;
     } catch (error) {
       console.error("Error handling payment success:", error);
       throw new Error("Failed to create subscription after payment");
@@ -218,6 +234,76 @@ export class SubscriptionService {
     } catch (error) {
       console.error("Error getting user plan type:", error);
       return null;
+    }
+  }
+
+  /**
+   * 获取用户的当前套餐信息（考虑订阅状态）
+   */
+  async getCurrentUserPlan(userId: number): Promise<{
+    plan: 'free' | 'paid';
+    planType?: string;
+    isActive: boolean;
+    expiresAt?: Date;
+    daysRemaining?: number;
+  }> {
+    try {
+      // 首先获取用户的基本信息
+      const user = await findUserById(userId);
+      if (!user) {
+        return { plan: 'free', isActive: false };
+      }
+
+      // 优先检查用户的活跃订阅，而不是依赖 user.plan 字段
+      const activeSubscription = await this.getUserActiveSubscription(userId);
+      
+      if (!activeSubscription) {
+        // 没有活跃订阅，确保用户状态为 free
+        if (user.plan !== 'free') {
+          await updateUserPlan(user.uuid, 'free');
+        }
+        return { plan: 'free', isActive: false };
+      }
+
+
+      const now = new Date();
+      const isExpired = activeSubscription.end_date < now;
+      
+      if (isExpired) {
+        // 订阅已过期，更新用户状态
+        if (user.plan !== 'free') {
+          await updateUserPlan(user.uuid, 'free');
+        }
+        // 停用过期的订阅
+        await this.updateSubscriptionStatus(
+          activeSubscription.id,
+          activeSubscription.payment_status as PaymentStatusEnum,
+          false
+        );
+        return { plan: 'free', isActive: false };
+      }
+
+      // 有活跃订阅，确保用户状态为 paid
+      if (user.plan !== 'paid') {
+        await updateUserPlan(user.uuid, 'paid');
+      }
+
+      // 计算剩余天数
+      const daysRemaining = Math.max(
+        0,
+        Math.ceil((activeSubscription.end_date.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+      );
+
+      return {
+        plan: 'paid',
+        planType: activeSubscription.plan.type,
+        isActive: true,
+        expiresAt: activeSubscription.end_date,
+        daysRemaining,
+      };
+    } catch (error) {
+      console.error("[SUBSCRIPTION] Error getting current user plan:", error);
+      return { plan: 'free', isActive: false };
     }
   }
 }

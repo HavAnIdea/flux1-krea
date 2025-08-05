@@ -23,7 +23,8 @@ export interface GenerationWithUsageResult extends GenerationResult {
  */
 export async function generateImageWithLimits(
   prompt: string,
-  fingerprintHash: string
+  fingerprintHash: string,
+  highQuality: boolean = false
 ): Promise<GenerationWithUsageResult> {
   const timerId = perf.start('generateImageWithLimits');
 
@@ -85,7 +86,7 @@ export async function generateImageWithLimits(
     }
 
     // Generate image using existing API logic
-    const generationResult = await callImageGenerationAPI(sanitizedPrompt);
+    const generationResult = await callImageGenerationAPI(sanitizedPrompt, highQuality);
 
     if (!generationResult.success) {
       return {
@@ -173,7 +174,7 @@ export async function getUserUsageStatus(
  * Call the existing image generation API
  * This replicates the logic from /api/generate-image/route.ts
  */
-async function callImageGenerationAPI(prompt: string): Promise<GenerationResult> {
+async function callImageGenerationAPI(prompt: string, highQuality: boolean = false): Promise<GenerationResult> {
   try {
     const apiKey = process.env.RUNWARE_API_KEY;
     if (!apiKey) {
@@ -196,10 +197,10 @@ async function callImageGenerationAPI(prompt: string): Promise<GenerationResult>
       model: "runware:107@1",
       numberResults: 1,
       outputFormat: "PNG",
-      width: 512,
-      height: 512,
-      steps: 20,
-      CFGScale: 3.5,
+      width: highQuality ? 1024 : 512,
+      height: highQuality ? 1024 : 512,
+      steps: highQuality ? 30 : 20,
+      CFGScale: highQuality ? 7 : 3.5,
       scheduler: "Default",
       includeCost: true,
       outputType: ["URL"],

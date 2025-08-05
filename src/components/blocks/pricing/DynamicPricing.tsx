@@ -20,11 +20,14 @@ export default function DynamicPricing({
   description = "Select the perfect subscription for your needs"
 }: DynamicPricingProps) {
   const { user, setShowSignModal } = useAppContext();
+  
+  // 检查用户是否为付费用户
+  const isPaidUser = user?.plan === 'paid' && user?.subscription?.isActive;
   const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
   const [checkoutPlanId, setCheckoutPlanId] = useState<number | null>(null);
-  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly');
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('yearly');
 
   // 获取套餐数据
   useEffect(() => {
@@ -96,7 +99,7 @@ export default function DynamicPricing({
       style: 'currency',
       currency: currency,
       minimumFractionDigits: 0,
-    }).format(price / 100);
+    }).format(price);
   };
 
   // 获取当前周期的套餐
@@ -106,7 +109,7 @@ export default function DynamicPricing({
 
   // 计算年度套餐的月均价格
   const getMonthlyEquivalent = (yearlyPrice: number) => {
-    return Math.round(yearlyPrice / 12);
+    return Math.round(yearlyPrice);
   };
 
   // 免费套餐功能
@@ -238,15 +241,16 @@ export default function DynamicPricing({
                 <Button
                   variant="outline"
                   className="w-full font-semibold"
+                  disabled={!!user}
                   onClick={() => {
                     if (!user) {
                       setShowSignModal(true);
-                    } else {
+                    } else if (!isPaidUser) {
                       toast.success("You're already on the free plan!");
                     }
                   }}
                 >
-                  {user ? "Current Plan" : "Get Started"}
+                  {!user ? "Get Started" : (isPaidUser ? "Free Plan" : "Current Plan")}
                 </Button>
               </div>
             </div>
@@ -272,15 +276,12 @@ export default function DynamicPricing({
                         {formatPrice(proPlan.price, proPlan.currency)}
                       </span>
                       <span className="block font-semibold">
-                        / {billingPeriod === 'monthly' ? 'month' : 'year'}
+                        / month
                       </span>
                       {billingPeriod === 'yearly' && (
                         <div className="flex flex-col items-start ml-2">
-                          <span className="text-sm text-muted-foreground line-through">
-                            {formatPrice(getMonthlyEquivalent(proPlan.price) * 12, proPlan.currency)}/year
-                          </span>
                           <span className="text-sm text-green-600 font-medium">
-                            Save {formatPrice((getMonthlyEquivalent(proPlan.price) * 12) - proPlan.price, proPlan.currency)}
+                            Save 20%
                           </span>
                         </div>
                       )}
@@ -308,10 +309,12 @@ export default function DynamicPricing({
               <div className="flex flex-col gap-2">
                 <Button
                   className="w-full font-semibold"
-                  disabled={isCheckoutLoading}
+                  disabled={isCheckoutLoading || isPaidUser}
                   onClick={() => {
-                    if (proPlan) {
+                    if (proPlan && !isPaidUser) {
                       handleCheckout(proPlan.id);
+                    } else if (isPaidUser) {
+                      toast.success("You're already on the Pro plan!");
                     } else {
                       toast.error("Pro plan not available");
                     }
@@ -322,6 +325,8 @@ export default function DynamicPricing({
                       <Loader className="mr-2 h-4 w-4 animate-spin" />
                       Processing...
                     </>
+                  ) : isPaidUser ? (
+                    "Current Plan"
                   ) : (
                     "Upgrade to Pro"
                   )}

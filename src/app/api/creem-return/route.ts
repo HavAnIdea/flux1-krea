@@ -43,7 +43,7 @@ export async function GET(req: Request) {
       userId,
       planId,
       orderId,
-      plan.price / 100, // 假设价格以分为单位存储
+      plan.price, // 假设价格以分为单位存储
       'creem'
     );
 

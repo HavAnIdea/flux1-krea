@@ -35,6 +35,18 @@ export async function findUserByUuid(
   return user;
 }
 
+export async function findUserById(
+  id: number
+): Promise<typeof users.$inferSelect | undefined> {
+  const [user] = await db()
+    .select()
+    .from(users)
+    .where(eq(users.id, id))
+    .limit(1);
+
+  return user;
+}
+
 export async function getUsers(
   page: number = 1,
   limit: number = 50
@@ -197,6 +209,22 @@ export async function resetUserDailyUsage(
     .set({
       usage_count: 1,
       last_usage_date: current_date,
+      updated_at: new Date()
+    })
+    .where(eq(users.uuid, user_uuid))
+    .returning();
+
+  return user;
+}
+
+export async function updateUserPlan(
+  user_uuid: string,
+  plan: string
+): Promise<typeof users.$inferSelect | undefined> {
+  const [user] = await db()
+    .update(users)
+    .set({
+      plan,
       updated_at: new Date()
     })
     .where(eq(users.uuid, user_uuid))

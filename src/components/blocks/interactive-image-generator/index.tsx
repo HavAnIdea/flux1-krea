@@ -100,7 +100,7 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
   }, []);
 
   // Handle image generation
-  const handleGenerate = useCallback(async () => {
+  const handleGenerate = useCallback(async (highQuality?: boolean) => {
     // Validation
     if (!state.prompt.trim()) {
       setState(prev => ({
@@ -161,7 +161,7 @@ export default function InteractiveImageGenerator({ section }: InteractiveImageG
 
     try {
       // Call the new Server Action with usage limits
-      const result = await generateImageWithLimits(state.prompt.trim(), fingerprint);
+      const result = await generateImageWithLimits(state.prompt.trim(), fingerprint, highQuality);
 
       if (result.success && result.imageUrl) {
         // Update usage status if provided

@@ -50,6 +50,7 @@ export async function getUserActiveSubscription(
   try {
     const now = new Date();
     
+    
     const [subscription] = await db()
       .select({
         subscription: userSubscriptions,
@@ -72,7 +73,7 @@ export async function getUserActiveSubscription(
       return null;
     }
 
-    return {
+    const result = {
       ...subscription.subscription,
       payment_status: subscription.subscription.payment_status as PaymentStatusEnum,
       payment_method: subscription.subscription.payment_method || undefined,
@@ -92,6 +93,9 @@ export async function getUserActiveSubscription(
         created_at: new Date(subscription.plan.created_at),
       },
     };
+    
+    
+    return result;
   } catch (error) {
     console.error("Error fetching user active subscription:", error);
     throw new Error("Failed to fetch user active subscription");

@@ -14,6 +14,14 @@ export interface User {
   invite_code?: string;
   invited_by?: string;
   is_affiliate?: boolean;
+  plan?: 'free' | 'paid';
+  subscription?: {
+    plan: 'free' | 'paid';
+    planType?: string;
+    isActive: boolean;
+    expiresAt?: Date;
+    daysRemaining?: number;
+  };
 }
 
 // UserCredits interface removed - no credit system
