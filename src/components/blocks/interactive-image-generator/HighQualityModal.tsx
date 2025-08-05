@@ -69,13 +69,13 @@ export default function HighQualityModal({ open, onOpenChange }: HighQualityModa
             <div className="flex gap-4">
               <Button
                 variant="outline"
-                className="w-[120px] h-12 text-base shrink-0"
+                className="w-[120px] h-9 text-base shrink-0"
                 onClick={() => onOpenChange(false)}
               >
                 Not Now
               </Button>
               <Button
-                className="flex-1 h-16 text-lg font-bold bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-200"
+                className="flex-1 h-9 text-lg font-bold bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-200"
                 onClick={handleUpgrade}
               >
                 Upgrade to Pro

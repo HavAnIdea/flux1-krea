@@ -100,13 +100,11 @@ export default function LeftPanel({
                 id="high-quality"
                 checked={highQuality}
                 onCheckedChange={handleHighQualityChange}
-                disabled={!isPaidUser}
               />
               <div className="space-y-0.5">
                 <Label 
                   htmlFor="high-quality" 
-                  className={`text-sm font-medium cursor-pointer ${!isPaidUser ? 'cursor-pointer' : ''}`}
-                  onClick={() => !isPaidUser && setShowHighQualityModal(true)}
+                  className="text-sm font-medium"
                 >
                   High Quality
                 </Label>
