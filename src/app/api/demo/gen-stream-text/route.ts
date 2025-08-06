@@ -1,5 +1,4 @@
 import {
-  LanguageModelV1,
   extractReasoningMiddleware,
   streamText,
   wrapLanguageModel,
@@ -18,7 +17,7 @@ export async function POST(req: Request) {
       return respErr("invalid params");
     }
 
-    let textModel: LanguageModelV1;
+    let textModel: any;
 
     switch (provider) {
       case "openai":
@@ -29,7 +28,7 @@ export async function POST(req: Request) {
         break;
       case "openrouter":
         const openrouter = createOpenRouter({
-          apiKey: process.env.OPENROUTER_API_KEY,
+          apiKey: process.env.OPENROUTER_API_KEY!,
         });
         textModel = openrouter(model);
 
@@ -44,8 +43,8 @@ export async function POST(req: Request) {
       case "siliconflow":
         const siliconflow = createOpenAICompatible({
           name: "siliconflow",
-          apiKey: process.env.SILICONFLOW_API_KEY,
-          baseURL: process.env.SILICONFLOW_BASE_URL,
+          apiKey: process.env.SILICONFLOW_API_KEY!,
+          baseURL: process.env.SILICONFLOW_BASE_URL!,
         });
         textModel = siliconflow(model);
 
@@ -74,9 +73,7 @@ export async function POST(req: Request) {
       },
     });
 
-    return result.toDataStreamResponse({
-      sendReasoning: true,
-    });
+    return result.toTextStreamResponse();
   } catch (err) {
     console.log("gen text stream failed:", err);
     return respErr("gen text stream failed");

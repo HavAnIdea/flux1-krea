@@ -1,4 +1,4 @@
-import type { ImageModelV1, ImageModelV1CallWarning } from "@ai-sdk/provider";
+import type { ImageModelV2, ImageModelV2CallWarning } from "@ai-sdk/provider";
 import { KlingImageModelId, KlingImageSettings } from "./kling-image-settings";
 
 import { FetchFunction } from "@ai-sdk/provider-utils";
@@ -14,8 +14,8 @@ interface KlingImageModelConfig {
   fetch?: FetchFunction;
 }
 
-export class KlingImageModel implements ImageModelV1 {
-  readonly specificationVersion = "v1";
+export class KlingImageModel implements ImageModelV2 {
+  readonly specificationVersion = "v2";
 
   readonly modelId: KlingImageModelId;
   readonly settings: KlingImageSettings;
@@ -49,10 +49,10 @@ export class KlingImageModel implements ImageModelV1 {
     providerOptions,
     headers,
     abortSignal,
-  }: Parameters<ImageModelV1["doGenerate"]>[0]): Promise<
-    Awaited<ReturnType<ImageModelV1["doGenerate"]>>
+  }: Parameters<ImageModelV2["doGenerate"]>[0]): Promise<
+    Awaited<ReturnType<ImageModelV2["doGenerate"]>>
   > {
-    const warnings: Array<ImageModelV1CallWarning> = [];
+    const warnings: Array<ImageModelV2CallWarning> = [];
     let images: Array<Uint8Array> = [];
     const imgUrls: Array<string> = [];
     const currentDate = new Date();

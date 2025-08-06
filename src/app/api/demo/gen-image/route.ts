@@ -1,7 +1,7 @@
 import { JSONValue, experimental_generateImage as generateImage } from "ai";
 import { respData, respErr } from "@/lib/resp";
 
-import type { ImageModelV1 } from "@ai-sdk/provider";
+import type { ImageModelV2 } from "@ai-sdk/provider";
 import { getUuid } from "@/lib/hash";
 import { kling } from "@/aisdk/kling";
 import { newStorage } from "@/lib/storage";
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       return respErr("invalid params");
     }
 
-    let imageModel: ImageModelV1;
+    let imageModel: ImageModelV2;
     let providerOptions: Record<string, Record<string, JSONValue>> = {};
 
     switch (provider) {
